@@ -6,6 +6,6 @@ public class LeagueOfMinecraft extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        getLogger().info("Worked! :D");
     }
 }
