@@ -3,6 +3,7 @@ package com.bocktrow.lom.player;
 import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.champion.Champion;
 import com.bocktrow.lom.item.Item;
+import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
 import com.bocktrow.lom.statistic.Statistic;
 import org.bukkit.entity.Player;
 
@@ -42,6 +43,7 @@ public class GamePlayer {
         this.player = player;
 
         abilities = champion.getAbilitySet();
+        ScoreboardVisualizer.init(player);
     }
 
     public static HashMap<Player, GamePlayer> getGamePlayers() {

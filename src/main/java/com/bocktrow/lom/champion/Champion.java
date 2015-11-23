@@ -8,6 +8,8 @@ public abstract class Champion {
 
     private Ability[] abilitySet;
 
+    public abstract String getName();
+
     public abstract double getBaseAP();
     public abstract double getScalePerLevelAP();
 

@@ -7,6 +7,11 @@ import com.bocktrow.lom.champion.mrepic.ability.Desolve;
 public class MrEpic extends Champion {
 
     @Override
+    public String getName() {
+        return "Mr. Epic";
+    }
+
+    @Override
     public double getBaseAP() {
         return 10;
     }
