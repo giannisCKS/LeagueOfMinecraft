@@ -53,9 +53,17 @@ public class Desolve extends Ability {
         Block block = player.getPlayer().getTargetBlock((Set<Material>) materials, 12);
 
         if (block != null && block.getType() != Material.AIR) {
-            Location location = block.getLocation().add(0.5, 1.5, 0.5);
+            Location location = block.getLocation().add(0.5, 1, 0.5);
             block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 1.2).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
-            ParticleEffect.FLAME.display(1.2F, 1.2F, 1.2F, 0, 100, location, 24);
+
+            for (double i = 0; i<=2 * Math.PI; i += Math.PI / 16) {
+                for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
+                    double x = 1.2 * Math.cos(i) * Math.sin(j);
+                    double y = 1.2 * Math.sin(i) * Math.sin(j);
+                    double z = 1.2 * Math.cos(j);
+                    ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 1, location.clone().add(x, y, z), 24);
+                }
+            }
         }
     }
 
