@@ -26,7 +26,7 @@ public class ScoreboardVisualizer {
             }
 
             Objective objective = scoreboard.registerNewObjective("gameSidebar", "dummy");
-            objective.setDisplayName(ChatColor.YELLOW + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
+            objective.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
 
             objective.getScore(ChatColor.YELLOW + "").setScore(10);
 
@@ -40,7 +40,7 @@ public class ScoreboardVisualizer {
                 objective.getScore(ChatColor.YELLOW + "Max. health: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.HEALTH)).setScore(4);
                 objective.getScore(ChatColor.YELLOW + "Armor: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ARMOR)).setScore(3);
                 objective.getScore(ChatColor.YELLOW + "Magic Resist.: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MAGIC_RESISTANCE)).setScore(2);
-                objective.getScore(ChatColor.YELLOW + "Movement speed :" + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED)).setScore(1);
+                objective.getScore(ChatColor.YELLOW + "Movement speed: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED)).setScore(1);
             } else {
                 objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Details:").setScore(9);
             }

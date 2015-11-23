@@ -52,12 +52,12 @@ public class Desolve extends Ability {
         materials.addAll(Arrays.asList(Material.AIR, Material.LONG_GRASS));
         Block block = player.getPlayer().getTargetBlock((Set<Material>) materials, 12);
 
-        if (block != null && block.getType() != Material.AIR) {
+        if (block != null) {
             Location location = block.getLocation().add(0.5, 1, 0.5);
             block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 1.2).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
 
-            for (double i = 0; i<=2 * Math.PI; i += Math.PI / 16) {
-                for (double j = 0; j<= Math.PI; j += Math.PI / 16) {
+            for (double i = 0; i<=2 * Math.PI; i += Math.PI / 8) {
+                for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
                     double x = 1.2 * Math.cos(i) * Math.sin(j);
                     double y = 1.2 * Math.sin(i) * Math.sin(j);
                     double z = 1.2 * Math.cos(j);
