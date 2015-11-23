@@ -98,4 +98,8 @@ public class GamePlayer {
         calculateStatsFromItems();
         calculateExperience();
     }
+
+    public Ability[] getAbilities() {
+        return abilities;
+    }
 }

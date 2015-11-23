@@ -1,6 +1,7 @@
 package com.bocktrow.lom.gametick;
 
 import com.bocktrow.lom.LeagueOfMinecraft;
+import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.player.visualize.AbilityVisualizer;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
@@ -19,6 +20,11 @@ public class Tick {
         GamePlayer.getGamePlayers().values().forEach(gamePlayer -> {
             AbilityVisualizer.visualize(gamePlayer);
             if (currentTick % 4 == 0) ScoreboardVisualizer.visualize(gamePlayer);
+            if (currentTick % 10 == 0) {
+                for (Ability ability : gamePlayer.getAbilities()) {
+                    ability.decreaseCooldown();
+                }
+            }
         });
 
         currentTick++;
