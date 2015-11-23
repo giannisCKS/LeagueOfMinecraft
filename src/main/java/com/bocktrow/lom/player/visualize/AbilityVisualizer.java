@@ -15,10 +15,10 @@ public class AbilityVisualizer {
         PlayerInventory inventory = player.getInventory();
 
         try {
-            Ability ability1 = gamePlayer.getChampion().getAbilities()[0].newInstance();
-            Ability ability2 = gamePlayer.getChampion().getAbilities()[1].newInstance();
-            Ability ability3 = gamePlayer.getChampion().getAbilities()[2].newInstance();
-            Ability ability4 = gamePlayer.getChampion().getAbilities()[3].newInstance();
+            Ability ability1 = gamePlayer.getChampion().getAbility1().newInstance();
+            Ability ability2 = gamePlayer.getChampion().getAbility2().newInstance();
+            Ability ability3 = gamePlayer.getChampion().getAbility3().newInstance();
+            Ability ability4 = gamePlayer.getChampion().getAbility4().newInstance();
 
             inventory.setItem(1, ItemUtils.makeItem(Material.INK_SACK, ability1.getName(), ability1.getDescription(gamePlayer)));
             inventory.setItem(2, ItemUtils.makeItem(Material.INK_SACK, ability1.getName(), ability2.getDescription(gamePlayer)));

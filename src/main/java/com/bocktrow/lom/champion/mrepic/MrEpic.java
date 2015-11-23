@@ -17,12 +17,22 @@ public class MrEpic extends Champion {
     }
 
     @Override
-    public Class<? extends Ability>[] getAbilities() {
-        Class<? extends Ability>[] abilities = (Class<? extends Ability>[]) new Object[4];
-        abilities[0] = Desolve.class;
-        abilities[1] = Desolve.class;
-        abilities[2] = Desolve.class;
-        abilities[3] = Desolve.class;
-        return abilities;
+    public Class<? extends Ability> getAbility1() {
+        return Desolve.class;
+    }
+
+    @Override
+    public Class<? extends Ability> getAbility2() {
+        return Desolve.class;
+    }
+
+    @Override
+    public Class<? extends Ability> getAbility3() {
+        return Desolve.class;
+    }
+
+    @Override
+    public Class<? extends Ability> getAbility4() {
+        return Desolve.class;
     }
 }
