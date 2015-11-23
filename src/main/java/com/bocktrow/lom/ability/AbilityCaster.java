@@ -11,7 +11,7 @@ public class AbilityCaster implements Listener {
 
     @EventHandler
     public void interact(PlayerInteractEvent event) {
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_AIR)
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
                 && (event.getPlayer().getInventory().getHeldItemSlot() >= 1 && event.getPlayer().getInventory().getHeldItemSlot() <= 4)) {
             if (GamePlayer.getGamePlayer(event.getPlayer()) != null) {
                 event.setCancelled(true);

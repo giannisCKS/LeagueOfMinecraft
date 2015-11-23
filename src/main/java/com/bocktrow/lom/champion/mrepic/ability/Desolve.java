@@ -61,7 +61,6 @@ public class Desolve extends Ability {
 
     @Override
     public void cast(GamePlayer player, PlayerInteractEvent event) {
-
         if (getCurrentCooldown() != 0) return;
 
         Location location = player.getPlayer().getEyeLocation();
@@ -73,6 +72,9 @@ public class Desolve extends Ability {
             vector.add(toAdd);
             if (vector.length() >= 10) return;
         }
+
+
+        location.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location.clone().add(vector)) <= 1.2 && entity != player.getPlayer()).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
 
         for (double i = 0; i<=2 * Math.PI; i += Math.PI / 8) {
             for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
