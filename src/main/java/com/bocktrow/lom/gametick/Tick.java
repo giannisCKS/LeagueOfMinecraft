@@ -9,6 +9,8 @@ import org.bukkit.scoreboard.Scoreboard;
 
 public class Tick {
 
+    public static int currentTick = 0;
+
     public static void init() {
         Bukkit.getScheduler().runTaskTimer(LeagueOfMinecraft.INSTANCE, Tick::tick, 2L, 2L);
     }
@@ -16,8 +18,10 @@ public class Tick {
     public static void tick() {
         GamePlayer.getGamePlayers().values().forEach(gamePlayer -> {
             AbilityVisualizer.visualize(gamePlayer);
-            ScoreboardVisualizer.visualize(gamePlayer);
+            if (currentTick % 2 == 0) ScoreboardVisualizer.visualize(gamePlayer);
         });
+
+        currentTick++;
     }
 
 }
