@@ -48,6 +48,9 @@ public class Desolve extends Ability {
 
     @Override
     public void cast(GamePlayer player, PlayerInteractEvent event) {
+        if (getCurrentCooldown() != 0) return;
+        setCooldown(cooldown());
+
         Set<Material> materials = new HashSet<>();
         materials.addAll(Arrays.asList(Material.AIR, Material.LONG_GRASS));
         Block block = player.getPlayer().getTargetBlock((Set<Material>) materials, 12);
@@ -76,5 +79,4 @@ public class Desolve extends Ability {
     public int cooldown() {
         return 10;
     }
-
 }
