@@ -16,7 +16,7 @@ public class AbilityCaster implements Listener {
             if (GamePlayer.getGamePlayer(event.getPlayer()) != null) {
                 event.setCancelled(true);
                 GamePlayer gamePlayer = GamePlayer.getGamePlayer(event.getPlayer());
-                gamePlayer.getAbility(event.getPlayer().getInventory().getHeldItemSlot());
+                gamePlayer.getAbility(event.getPlayer().getInventory().getHeldItemSlot()).cast(gamePlayer);
             }
         }
 
