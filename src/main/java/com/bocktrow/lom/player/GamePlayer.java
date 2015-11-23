@@ -37,6 +37,10 @@ public class GamePlayer {
         this.player = player;
     }
 
+    public static HashMap<Player, GamePlayer> getGamePlayers() {
+        return gamePlayers;
+    }
+
     public Player getPlayer() {
         return player;
     }
