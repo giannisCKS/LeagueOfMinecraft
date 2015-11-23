@@ -2,6 +2,7 @@ package com.bocktrow.lom.ability;
 
 import com.bocktrow.lom.player.GamePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public abstract class Ability {
 
@@ -10,7 +11,7 @@ public abstract class Ability {
 
     public abstract boolean isCastable();
     public abstract void visualize(GamePlayer player);
-    public abstract void cast(GamePlayer player);
+    public abstract void cast(GamePlayer player, PlayerInteractEvent event);
     public abstract void tick(GamePlayer player);
 
     public abstract int cooldown();
