@@ -1,5 +1,6 @@
 package com.bocktrow.lom.ability;
 
+import com.bocktrow.lom.player.GamePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -10,8 +11,13 @@ public class AbilityCaster implements Listener {
 
     @EventHandler
     public void interact(PlayerInteractEvent event) {
-        if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-
+        if ((event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && (event.getPlayer().getInventory().getHeldItemSlot() >= 1 && event.getPlayer().getInventory().getHeldItemSlot() <= 4)) {
+            if (GamePlayer.getGamePlayer(event.getPlayer()) != null) {
+                event.setCancelled(true);
+                GamePlayer gamePlayer = GamePlayer.getGamePlayer(event.getPlayer());
+                gamePlayer.getAbility(event.getPlayer().getInventory().getHeldItemSlot());
+            }
         }
 
     }
