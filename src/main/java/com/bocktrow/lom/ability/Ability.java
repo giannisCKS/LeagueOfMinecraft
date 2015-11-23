@@ -9,6 +9,7 @@ public abstract class Ability {
     public abstract String[] getDescription(GamePlayer player);
 
     public abstract boolean isCastable();
+    public abstract void visualize(GamePlayer player);
     public abstract void cast(GamePlayer player);
     public abstract void tick(GamePlayer player);
 

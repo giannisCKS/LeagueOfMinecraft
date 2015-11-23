@@ -19,6 +19,8 @@ public class AbilityVisualizer {
         for (int i = 1; i <= 4; i++) {
             Ability ability = gamePlayer.getAbility(i);
             inventory.setItem(i, ItemUtils.makeItem(Material.INK_SACK, 1, 10, ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
+
+            if (inventory.getHeldItemSlot() == i) ability.visualize(gamePlayer);
         }
     }
 
