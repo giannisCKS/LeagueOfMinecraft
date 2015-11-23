@@ -54,8 +54,8 @@ public class GamePlayer {
         return player;
     }
 
-    public double getAbilityPower() {
-        return champion.getBaseAP() + (1 - level) * champion.getScalePerLevelAP() + (statistics.containsKey(Statistic.ABILITY_POWER) ? statistics.get(Statistic.ABILITY_POWER) : 0);
+    public double getStatistic(Statistic statistic) {
+        return champion.getBaseStat(statistic) + (1 - level) * champion.getBaseStatIncr(statistic) + (statistics.containsKey(Statistic.ABILITY_POWER) ? statistics.get(Statistic.ABILITY_POWER) : 0);
     }
 
     public int getLevel() {

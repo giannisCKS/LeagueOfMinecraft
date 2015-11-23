@@ -2,6 +2,7 @@ package com.bocktrow.lom.player.visualize;
 
 import com.bocktrow.lom.LeagueOfMinecraft;
 import com.bocktrow.lom.player.GamePlayer;
+import com.bocktrow.lom.statistic.Statistic;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -32,14 +33,14 @@ public class ScoreboardVisualizer {
             if (player.getInventory().getHeldItemSlot() == 7) {
 
                 objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Statistics:").setScore(9);
-                objective.getScore(ChatColor.YELLOW + "Attack damage: " + ChatColor.AQUA + '0').setScore(8);
-                objective.getScore(ChatColor.YELLOW + "Ability power: " + ChatColor.AQUA + gamePlayer.getAbilityPower()).setScore(7);
-                objective.getScore(ChatColor.YELLOW + "Cr. strike ch.: " + ChatColor.AQUA + (0.3 * 100) + "%").setScore(6);
-                objective.getScore(ChatColor.YELLOW + "Life steal:").setScore(5);
-                objective.getScore(ChatColor.YELLOW + "Max. health: ").setScore(4);
-                objective.getScore(ChatColor.YELLOW + "Armor:").setScore(3);
-                objective.getScore(ChatColor.YELLOW + "Magic Resist.:").setScore(2);
-                objective.getScore(ChatColor.YELLOW + "Movement speed:").setScore(1);
+                objective.getScore(ChatColor.YELLOW + "Attack damage: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ATTACK_DAMAGE)).setScore(8);
+                objective.getScore(ChatColor.YELLOW + "Ability power: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ABILITY_POWER)).setScore(7);
+                objective.getScore(ChatColor.YELLOW + "Cr. strike ch.: " + ChatColor.AQUA + (gamePlayer.getStatistic(Statistic.CRITICAL_DAMAGE) * 100) + "%").setScore(6);
+                objective.getScore(ChatColor.YELLOW + "Life steal: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.LIFE_STEAL)).setScore(5);
+                objective.getScore(ChatColor.YELLOW + "Max. health: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.HEALTH)).setScore(4);
+                objective.getScore(ChatColor.YELLOW + "Armor: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ARMOR)).setScore(3);
+                objective.getScore(ChatColor.YELLOW + "Magic Resist.: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MAGIC_RESISTANCE)).setScore(2);
+                objective.getScore(ChatColor.YELLOW + "Movement speed :" + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED)).setScore(1);
             } else {
                 objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Details:").setScore(9);
             }
