@@ -51,8 +51,8 @@ public class Desolve extends Ability {
 
         if (block != null) {
             Location location = block.getLocation().add(0.5, 1.5, 0.5);
-            block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 3).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
-            ParticleEffect.FLAME.display(3F, 3F, 3F, 0, 100, location, 24);
+            block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 1.2).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
+            ParticleEffect.FLAME.display(1.2F, 1.2F, 1.2F, 0, 100, location, 24);
         }
     }
 
