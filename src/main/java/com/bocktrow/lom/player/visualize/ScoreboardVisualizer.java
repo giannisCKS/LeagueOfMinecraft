@@ -36,7 +36,7 @@ public class ScoreboardVisualizer {
                 objective.getScore(ChatColor.YELLOW + "Attack damage: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ATTACK_DAMAGE)).setScore(8);
                 objective.getScore(ChatColor.YELLOW + "Ability power: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ABILITY_POWER)).setScore(7);
                 objective.getScore(ChatColor.YELLOW + "Cr. strike ch.: " + ChatColor.AQUA + (gamePlayer.getStatistic(Statistic.CRITICAL_DAMAGE) * 100) + "%").setScore(6);
-                objective.getScore(ChatColor.YELLOW + "Life steal: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.LIFE_STEAL)).setScore(5);
+                objective.getScore(ChatColor.YELLOW + "Life steal: " + ChatColor.AQUA + (gamePlayer.getStatistic(Statistic.LIFE_STEAL)* 100) + "%").setScore(5);
                 objective.getScore(ChatColor.YELLOW + "Max. health: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.HEALTH)).setScore(4);
                 objective.getScore(ChatColor.YELLOW + "Armor: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ARMOR)).setScore(3);
                 objective.getScore(ChatColor.YELLOW + "Magic Resist.: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MAGIC_RESISTANCE)).setScore(2);
