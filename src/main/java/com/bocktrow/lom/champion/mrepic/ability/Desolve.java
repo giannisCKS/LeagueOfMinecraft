@@ -13,7 +13,7 @@ public class Desolve extends Ability {
 
     @Override
     public String[] getDescription(GamePlayer player) {
-        return new String[]{"Causes an explosion that deals " + player.getAbilityPower() + " magic damage to enemy units!"};
+        return new String[]{"Causes an explosion that deals [y]" + player.getAbilityPower() + " magic damage [G]to enemy units!"};
     }
 
     @Override

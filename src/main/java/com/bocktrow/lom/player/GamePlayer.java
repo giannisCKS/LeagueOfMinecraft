@@ -1,11 +1,13 @@
 package com.bocktrow.lom.player;
 
+import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.champion.Champion;
 import com.bocktrow.lom.item.Item;
 import com.bocktrow.lom.statistic.Statistic;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class GamePlayer {
@@ -20,6 +22,8 @@ public class GamePlayer {
         gamePlayers.remove(player);
     }
 
+    //Actual class
+
     public static GamePlayer getGamePlayer(Player player) {
         return gamePlayers.get(player);
     }
@@ -28,6 +32,7 @@ public class GamePlayer {
     private Player player;
     private int level = 1;
     private int experience = 0;
+    private Ability[] abilities;
 
     private ArrayList<Item> items = new ArrayList<>();
     private HashMap<Statistic, Double> statistics = new HashMap<>();
@@ -35,6 +40,8 @@ public class GamePlayer {
     public GamePlayer(Champion champion, Player player) {
         this.champion = champion;
         this.player = player;
+
+        abilities = champion.getAbilitySet();
     }
 
     public static HashMap<Player, GamePlayer> getGamePlayers() {
@@ -59,6 +66,10 @@ public class GamePlayer {
 
     public void earnExperience(int experience) {
         this.experience += experience;
+    }
+
+    public Ability getAbility(int i) {
+        return abilities[i];
     }
 
     public void calculateStatsFromItems() {

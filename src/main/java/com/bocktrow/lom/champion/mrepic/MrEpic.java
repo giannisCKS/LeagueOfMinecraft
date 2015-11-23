@@ -17,6 +17,11 @@ public class MrEpic extends Champion {
     }
 
     @Override
+    public Class<? extends Ability> getAbilityP() {
+        return Desolve.class;
+    }
+
+    @Override
     public Class<? extends Ability> getAbility1() {
         return Desolve.class;
     }

@@ -3,10 +3,12 @@ package com.bocktrow.lom.player.visualize;
 import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.utils.ItemUtils;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.PlayerInventory;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 public class AbilityVisualizer {
 
@@ -14,20 +16,23 @@ public class AbilityVisualizer {
         Player player = gamePlayer.getPlayer();
         PlayerInventory inventory = player.getInventory();
 
-        try {
-            Ability ability1 = gamePlayer.getChampion().getAbility1().newInstance();
-            Ability ability2 = gamePlayer.getChampion().getAbility2().newInstance();
-            Ability ability3 = gamePlayer.getChampion().getAbility3().newInstance();
-            Ability ability4 = gamePlayer.getChampion().getAbility4().newInstance();
-
-            inventory.setItem(1, ItemUtils.makeItem(Material.INK_SACK, ability1.getName(), ability1.getDescription(gamePlayer)));
-            inventory.setItem(2, ItemUtils.makeItem(Material.INK_SACK, ability1.getName(), ability2.getDescription(gamePlayer)));
-            inventory.setItem(3, ItemUtils.makeItem(Material.INK_SACK, ability1.getName(), ability3.getDescription(gamePlayer)));
-            inventory.setItem(4, ItemUtils.makeItem(Material.INK_SACK, ability1.getName(), ability4.getDescription(gamePlayer)));
-
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+        for (int i = 1; i <= 4; i++) {
+            Ability ability = gamePlayer.getAbility(i);
+            inventory.setItem(i, ItemUtils.makeItem(Material.INK_SACK, 1, 10, ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
         }
+    }
+
+    private static String[] formatText(String[] des) {
+        String[] description = new String[des.length];
+        System.arraycopy(des, 0, description, 0, des.length);
+        for (int i = 0; i < description.length; i++) {
+            String temp = description[i];
+            temp = ChatColor.GRAY + temp;
+            temp = temp.replace("[G]", ChatColor.GRAY + "");
+            temp = temp.replace("[Y]", ChatColor.YELLOW + "");
+            description[i] = temp;
+        }
+        return description;
     }
 
 }
