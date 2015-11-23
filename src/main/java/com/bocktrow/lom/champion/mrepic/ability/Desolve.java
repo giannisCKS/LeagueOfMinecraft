@@ -44,8 +44,8 @@ public class Desolve extends Ability {
             ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, location.clone().add(10 * Math.sin(i), 0, 10 * Math.cos(i)), player1);
         }
 
-        location = player.getPlayer().getLocation();
-        Vector vector = player.getPlayer().getLocation().getDirection();
+        location = player.getPlayer().getEyeLocation();
+        Vector vector = player.getPlayer().getEyeLocation().getDirection();
         vector.normalize();
         Vector toAdd = vector.clone().multiply(0.1);
 
@@ -64,8 +64,8 @@ public class Desolve extends Ability {
 
         if (getCurrentCooldown() != 0) return;
 
-        Location location = player.getPlayer().getLocation();
-        Vector vector = player.getPlayer().getLocation().getDirection();
+        Location location = player.getPlayer().getEyeLocation();
+        Vector vector = player.getPlayer().getEyeLocation().getDirection();
         vector.normalize();
         Vector toAdd = vector.clone().multiply(0.1);
 
