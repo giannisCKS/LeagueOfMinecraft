@@ -2,6 +2,7 @@ package com.bocktrow.lom.champion.mrepic.ability;
 
 import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.player.GamePlayer;
+import com.bocktrow.lom.statistic.Statistic;
 import org.bukkit.entity.Player;
 
 public class Desolve extends Ability {
@@ -13,7 +14,7 @@ public class Desolve extends Ability {
 
     @Override
     public String[] getDescription(GamePlayer player) {
-        return new String[]{"Causes an explosion that deals [Y]" + player.getAbilityPower() + " magic damage [G]to enemy units!"};
+        return new String[]{"Causes an explosion that deals [Y]" + player.getStatistic(Statistic.ABILITY_POWER) + " magic damage [G]to enemy units!"};
     }
 
     @Override
