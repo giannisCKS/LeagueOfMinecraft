@@ -57,7 +57,7 @@ public class Desolve extends Ability {
             block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 1.2).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
 
             for (double i = 0; i<=2 * Math.PI; i += Math.PI / 16) {
-                for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
+                for (double j = 0; j<= Math.PI; j += Math.PI / 16) {
                     double x = 1.2 * Math.cos(i) * Math.sin(j);
                     double y = 1.2 * Math.sin(i) * Math.sin(j);
                     double z = 1.2 * Math.cos(j);
