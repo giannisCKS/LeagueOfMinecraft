@@ -50,9 +50,9 @@ public class Desolve extends Ability {
     public void cast(GamePlayer player, PlayerInteractEvent event) {
         Set<Material> materials = new HashSet<>();
         materials.addAll(Arrays.asList(Material.AIR, Material.LONG_GRASS));
-        Block block = player.getPlayer().getTargetBlock((Set<Material>) materials, 20);
+        Block block = player.getPlayer().getTargetBlock((Set<Material>) materials, 12);
 
-        if (block != null && block.getLocation().distance(player.getPlayer().getLocation()) <= 10 && block.getType() != Material.AIR) {
+        if (block != null && block.getType() != Material.AIR) {
             Location location = block.getLocation().add(0.5, 1.5, 0.5);
             block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 1.2).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
             ParticleEffect.FLAME.display(1.2F, 1.2F, 1.2F, 0, 100, location, 24);
