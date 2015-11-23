@@ -13,11 +13,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.*;
+import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Desolve extends Ability {
 
@@ -44,30 +43,47 @@ public class Desolve extends Ability {
         for (double i = 0; i<=2 * Math.PI; i += Math.PI / 32) {
             ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, location.clone().add(10 * Math.sin(i), 0, 10 * Math.cos(i)), player1);
         }
+
+        location = player.getPlayer().getLocation();
+        Vector vector = player.getPlayer().getLocation().getDirection();
+        vector.normalize();
+        Vector toAdd = vector.clone().multiply(0.1);
+
+        while (location.clone().add(vector).getBlock() == null || location.clone().add(vector).getBlock().getType() == Material.AIR) {
+            vector.add(toAdd);
+            if (vector.length() >= 10) return;
+        }
+
+        for (double i = 0; i<=2 * Math.PI; i += Math.PI / 32) {
+            ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, location.clone().add(vector).add(1.2 * Math.sin(i), 0, 1.2 * Math.cos(i)), player1);
+        }
     }
 
     @Override
     public void cast(GamePlayer player, PlayerInteractEvent event) {
+
         if (getCurrentCooldown() != 0) return;
-        setCooldown(cooldown());
 
-        Set<Material> materials = new HashSet<>();
-        materials.addAll(Arrays.asList(Material.AIR, Material.LONG_GRASS));
-        Block block = player.getPlayer().getTargetBlock((Set<Material>) materials, 12);
+        Location location = player.getPlayer().getLocation();
+        Vector vector = player.getPlayer().getLocation().getDirection();
+        vector.normalize();
+        Vector toAdd = vector.clone().multiply(0.1);
 
-        if (block != null) {
-            Location location = block.getLocation().add(0.5, 1, 0.5);
-            block.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location) <= 1.2).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
+        while (location.clone().add(vector).getBlock() == null || location.clone().add(vector).getBlock().getType() == Material.AIR) {
+            vector.add(toAdd);
+            if (vector.length() >= 10) return;
+        }
 
-            for (double i = 0; i<=2 * Math.PI; i += Math.PI / 8) {
-                for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
-                    double x = 1.2 * Math.cos(i) * Math.sin(j);
-                    double y = 1.2 * Math.sin(i) * Math.sin(j);
-                    double z = 1.2 * Math.cos(j);
-                    ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 1, location.clone().add(x, y, z), 24);
-                }
+        for (double i = 0; i<=2 * Math.PI; i += Math.PI / 8) {
+            for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
+                double x = 1.2 * Math.cos(i) * Math.sin(j);
+                double y = 1.2 * Math.sin(i) * Math.sin(j);
+                double z = 1.2 * Math.cos(j);
+                ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 1, location.clone().add(vector).add(x, y, z), 24);
             }
         }
+
+        setCooldown(cooldown());
     }
 
     @Override
