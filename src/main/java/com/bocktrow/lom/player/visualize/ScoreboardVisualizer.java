@@ -42,6 +42,8 @@ public class ScoreboardVisualizer {
 
         objective.getScore(ChatColor.RED + "").setScore(0);
 
+        objective.setDisplaySlot(DisplaySlot.SIDEBAR);
+
 
     }
 
