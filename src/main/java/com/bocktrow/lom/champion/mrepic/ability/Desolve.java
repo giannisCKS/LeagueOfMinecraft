@@ -54,7 +54,7 @@ public class Desolve extends Ability {
             if (vector.length() >= 10) return;
         }
 
-        for (double i = 0; i<=2 * Math.PI; i += Math.PI / 32) {
+        for (double i = 0; i<=2 * Math.PI; i += Math.PI / 16) {
             ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, location.clone().add(vector).add(1.2 * Math.sin(i), 0, 1.2 * Math.cos(i)), player1);
         }
     }
