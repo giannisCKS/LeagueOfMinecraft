@@ -1,7 +1,10 @@
 package com.bocktrow.lom.player;
 
 import com.bocktrow.lom.statistic.Statistic;
+import com.bocktrow.lom.utils.Attributes;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class PlayerEntity {
 
@@ -28,6 +31,13 @@ public class PlayerEntity {
                 gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D) : gamePlayer.getStatistic(Statistic.MANA));
         gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getMaxHealth() > gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) ?
                 gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) : gamePlayer.getPlayer().getMaxHealth());
+
+        ItemStack itemStack = new ItemStack(Material.LEATHER_BOOTS);
+        Attributes attributes = new Attributes(itemStack);
+        attributes.add(Attributes.Attribute.newBuilder().name("Speed")
+                .type(Attributes.AttributeType.GENERIC_MOVEMENT_SPEED).amount(gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED)/ 100).build());
+
+        gamePlayer.getPlayer().getInventory().setBoots(attributes.getStack());
     }
 
 }

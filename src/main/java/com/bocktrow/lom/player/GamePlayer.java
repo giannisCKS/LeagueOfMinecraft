@@ -6,6 +6,7 @@ import com.bocktrow.lom.champion.Champion;
 import com.bocktrow.lom.item.Item;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
 import com.bocktrow.lom.statistic.Statistic;
+import com.bocktrow.lom.statuseffect.StatusEffect;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class GamePlayer {
     private int experience = 0;
     private Ability[] abilities;
     private double mana;
+    private ArrayList<StatusEffect> statusEffects = new ArrayList<>();
 
     private ArrayList<Item> items = new ArrayList<>();
     private HashMap<Statistic, Double> statistics = new HashMap<>();
@@ -100,6 +102,17 @@ public class GamePlayer {
     public void tick() {
         calculateStatsFromItems();
         calculateExperience();
+
+        statusEffects.stream().forEach(statusEffect -> {
+            statusEffect.tick(this);
+            if (statusEffect.getDuration() == 0) {
+                statusEffects.remove(statusEffect);
+            }
+        });
+    }
+
+    public ArrayList<StatusEffect> getStatusEffects() {
+        return statusEffects;
     }
 
     public Ability[] getAbilities() {

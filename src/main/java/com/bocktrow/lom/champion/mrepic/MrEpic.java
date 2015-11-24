@@ -1,6 +1,7 @@
 package com.bocktrow.lom.champion.mrepic;
 
 import com.bocktrow.lom.ability.Ability;
+import com.bocktrow.lom.champion.BaseStats;
 import com.bocktrow.lom.champion.Champion;
 import com.bocktrow.lom.champion.mrepic.ability.Desolve;
 import com.bocktrow.lom.statistic.Statistic;
@@ -59,6 +60,6 @@ public class MrEpic extends Champion {
             case HEALTH_REGEN: return 3;
             case COOLDOWN_REDUCTION: return 0.9;
         }
-        return 0;
+        return BaseStats.get(statistic);
     }
 }
