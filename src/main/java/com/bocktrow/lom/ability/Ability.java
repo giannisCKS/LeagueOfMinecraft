@@ -30,4 +30,5 @@ public abstract class Ability {
     public abstract void tick(GamePlayer player);
 
     public abstract int cooldown();
+    public abstract int manaCost();
 }

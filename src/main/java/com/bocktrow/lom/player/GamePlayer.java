@@ -8,7 +8,6 @@ import com.bocktrow.lom.statistic.Statistic;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GamePlayer {
@@ -34,6 +33,7 @@ public class GamePlayer {
     private int level = 1;
     private int experience = 0;
     private Ability[] abilities;
+    private int mana;
 
     private ArrayList<Item> items = new ArrayList<>();
     private HashMap<Statistic, Double> statistics = new HashMap<>();
@@ -42,9 +42,10 @@ public class GamePlayer {
         this.champion = champion;
         this.player = player;
 
+        mana = (int) getStatistic(Statistic.MANA);
         abilities = champion.getAbilitySet();
         ScoreboardVisualizer.init(player);
-        EntityPrepare.initPlayer(this);
+        PlayerEntity.initPlayer(this);
     }
 
     public static HashMap<Player, GamePlayer> getGamePlayers() {
@@ -110,5 +111,9 @@ public class GamePlayer {
 
     public int getExperience() {
         return experience;
+    }
+
+    public int getMana() {
+        return mana;
     }
 }

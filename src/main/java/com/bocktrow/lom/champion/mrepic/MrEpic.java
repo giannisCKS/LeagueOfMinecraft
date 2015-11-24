@@ -38,22 +38,23 @@ public class MrEpic extends Champion {
     }
 
     @Override
-    public int getBaseStatIncr(Statistic statistic) {
+    public double getBaseStatIncr(Statistic statistic) {
         switch (statistic) {
             case ABILITY_POWER: return 2;
             case ATTACK_DAMAGE: return 5;
             case HEALTH: return 25;
+            case MANA: return 10;
         }
         return 0;
     }
 
     @Override
-    public int getBaseStat(Statistic statistic) {
+    public double getBaseStat(Statistic statistic) {
         switch (statistic) {
             case ABILITY_POWER: return 10;
             case ATTACK_DAMAGE: return 32;
             case HEALTH: return 300;
-
+            case MANA: return 300;
         }
         return 0;
     }

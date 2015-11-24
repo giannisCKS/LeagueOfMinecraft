@@ -97,4 +97,8 @@ public class Desolve extends Ability {
     public int cooldown() {
         return 10;
     }
+
+    public int manaCost() { return 100; }
+
+
 }

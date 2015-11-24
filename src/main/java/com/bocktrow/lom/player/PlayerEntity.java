@@ -3,7 +3,7 @@ package com.bocktrow.lom.player;
 import com.bocktrow.lom.statistic.Statistic;
 import org.bukkit.entity.Player;
 
-public class EntityPrepare {
+public class PlayerEntity {
 
     public static void initPlayer(GamePlayer gamePlayer) {
         updatePlayer(gamePlayer);
@@ -20,6 +20,10 @@ public class EntityPrepare {
 
         player.setLevel(gamePlayer.getLevel());
         player.setExp((float) gamePlayer.getExperience() / gamePlayer.getExperienceForNext());
+    }
+
+    public static void tickPlayer(GamePlayer gamePlayer) {
+
     }
 
 }

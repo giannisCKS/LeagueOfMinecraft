@@ -2,13 +2,12 @@ package com.bocktrow.lom.gametick;
 
 import com.bocktrow.lom.LeagueOfMinecraft;
 import com.bocktrow.lom.ability.Ability;
-import com.bocktrow.lom.player.EntityPrepare;
+import com.bocktrow.lom.player.PlayerEntity;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.player.visualize.AbilityVisualizer;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
 import com.bocktrow.lom.player.visualize.TextHandler;
 import org.bukkit.Bukkit;
-import org.bukkit.scoreboard.Scoreboard;
 
 public class Tick {
 
@@ -29,7 +28,7 @@ public class Tick {
             if (currentTick % 4 == 0) ScoreboardVisualizer.visualize(gamePlayer);
             AbilityVisualizer.visualize(gamePlayer);
             TextHandler.visualize(gamePlayer);
-            EntityPrepare.updatePlayer(gamePlayer);
+            PlayerEntity.updatePlayer(gamePlayer);
         });
 
         currentTick++;

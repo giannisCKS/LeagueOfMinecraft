@@ -33,7 +33,7 @@ public abstract class Champion {
         return abilities;
     }
 
-    public abstract int getBaseStatIncr(Statistic statistic);
+    public abstract double getBaseStatIncr(Statistic statistic);
 
-    public abstract int getBaseStat(Statistic statistic);
+    public abstract double getBaseStat(Statistic statistic);
 }
