@@ -39,7 +39,8 @@ import com.google.common.io.InputSupplier;
 import com.google.common.io.OutputSupplier;
 import com.google.common.primitives.Primitives;
 
-public class NbtFactory {
+@SuppressWarnings("deprecation")
+public class NBTFactory {
     // Convert between NBT id and the equivalent class in java
     private static final BiMap<Integer, Class<?>> NBT_CLASS = HashBiMap.create();
     private static final BiMap<Integer, NbtType> NBT_ENUM = HashBiMap.create();
@@ -104,7 +105,7 @@ public class NbtFactory {
     private Method SAVE_COMPOUND;
 
     // Shared instance
-    private static NbtFactory INSTANCE;
+    private static NBTFactory INSTANCE;
 
     /**
      * Represents a root NBT compound.
@@ -119,8 +120,8 @@ public class NbtFactory {
      * <p>
      * See also:
      * <ul>
-     *   <li>{@link NbtFactory#createCompound()}</li>
-     *   <li>{@link NbtFactory#fromCompound(Object)}</li>
+     *   <li>{@link NBTFactory#createCompound()}</li>
+     *   <li>{@link NBTFactory#fromCompound(Object)}</li>
      * </ul>
      * @author Kristian
      */
@@ -267,8 +268,8 @@ public class NbtFactory {
      * Represents a root NBT list.
      * See also:
      * <ul>
-     *   <li>{@link NbtFactory#createNbtList()}</li>
-     *   <li>{@link NbtFactory#fromList(Object)}</li>
+     *   <li>{@link NBTFactory#createNbtList()}</li>
+     *   <li>{@link NBTFactory#fromList(Object)}</li>
      * </ul>
      * @author Kristian
      */
@@ -294,21 +295,21 @@ public class NbtFactory {
      * Retrieve or construct a shared NBT factory.
      * @return The factory.
      */
-    private static NbtFactory get() {
+    private static NBTFactory get() {
         if (INSTANCE == null)
-            INSTANCE = new NbtFactory();
+            INSTANCE = new NBTFactory();
         return INSTANCE;
     }
 
     /**
      * Construct an instance of the NBT factory by deducing the class of NBTBase.
      */
-    private NbtFactory() {
+    private NBTFactory() {
         if (BASE_CLASS == null) {
             try {
                 // Keep in mind that I do use hard-coded field names - but it's okay as long as we're dealing
                 // with CraftBukkit or its derivatives. This does not work in MCPC+ however.
-                ClassLoader loader = NbtFactory.class.getClassLoader();
+                ClassLoader loader = NBTFactory.class.getClassLoader();
                 //String packageName = "org.bukkit.craftbukkit.v1_6_R2";
                 String packageName = Bukkit.getServer().getClass().getPackage().getName();
                 Class<?> offlinePlayer = loader.loadClass(packageName + ".CraftOfflinePlayer");

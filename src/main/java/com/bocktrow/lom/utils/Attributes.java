@@ -15,6 +15,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 
+@SuppressWarnings("deprecation")
 public class Attributes {
     public enum Operation {
         ADD_NUMBER(0),
@@ -98,10 +99,10 @@ public class Attributes {
     }
 
     public static class Attribute {
-        private NbtFactory.NbtCompound data;
+        private NBTFactory.NbtCompound data;
 
         private Attribute(Builder builder) {
-            data = NbtFactory.createCompound();
+            data = NBTFactory.createCompound();
             setAmount(builder.amount);
             setOperation(builder.operation);
             setAttributeType(builder.type);
@@ -109,7 +110,7 @@ public class Attributes {
             setUUID(builder.uuid);
         }
 
-        private Attribute(NbtFactory.NbtCompound data) {
+        private Attribute(NBTFactory.NbtCompound data) {
             this.data = data;
         }
 
@@ -206,14 +207,14 @@ public class Attributes {
 
     // This may be modified
     public ItemStack stack;
-    private NbtFactory.NbtList attributes;
+    private NBTFactory.NbtList attributes;
 
     public Attributes(ItemStack stack) {
         // Create a CraftItemStack (under the hood)
-        this.stack = NbtFactory.getCraftItemStack(stack);
+        this.stack = NBTFactory.getCraftItemStack(stack);
 
         // Load NBT
-        NbtFactory.NbtCompound nbt = NbtFactory.fromItemTag(this.stack);
+        NBTFactory.NbtCompound nbt = NBTFactory.fromItemTag(this.stack);
         this.attributes = nbt.getList("AttributeModifiers", true);
     }
 
@@ -271,7 +272,7 @@ public class Attributes {
      * @return The attribute at that index.
      */
     public Attribute get(int index) {
-        return new Attribute((NbtFactory.NbtCompound) attributes.get(index));
+        return new Attribute((NBTFactory.NbtCompound) attributes.get(index));
     }
 
     // We can't make Attributes itself iterable without splitting it up into separate classes
@@ -283,7 +284,7 @@ public class Attributes {
                         new Function<Object, Attribute>() {
                             @Override
                             public Attribute apply(@Nullable Object element) {
-                                return new Attribute((NbtFactory.NbtCompound) element);
+                                return new Attribute((NBTFactory.NbtCompound) element);
                             }
                         });
             }
