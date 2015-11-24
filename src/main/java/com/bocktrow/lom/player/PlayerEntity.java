@@ -53,7 +53,7 @@ public class PlayerEntity {
         //AttributeName:"generic.attackDamage",Name:"generic.attackDamage",Amount:20,Operation:0,UUIDLeast:894654,UUIDMost:2872
         attribute.setString("AttributeName", "generic.movementSpeed");
         attribute.setString("Name", "generic.movementSpeed");
-        attribute.setDouble("Amount", movement * 0.7);
+        attribute.setDouble("Amount", (movement - 1));
         attribute.setInt("Operation", 1);
         attribute.setLong("UUIDLeast", 894654);
         attribute.setLong("UUIDMost", 2872);
