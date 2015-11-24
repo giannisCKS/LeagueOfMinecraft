@@ -55,6 +55,7 @@ public class MrEpic extends Champion {
             case ATTACK_DAMAGE: return 32;
             case HEALTH: return 300;
             case MANA: return 300;
+            case MANA_REGEN: return 10;
         }
         return 0;
     }

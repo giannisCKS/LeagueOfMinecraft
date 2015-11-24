@@ -28,6 +28,7 @@ public class Tick {
             if (currentTick % 4 == 0) ScoreboardVisualizer.visualize(gamePlayer);
             AbilityVisualizer.visualize(gamePlayer);
             TextHandler.visualize(gamePlayer);
+            PlayerEntity.tickPlayer(gamePlayer);
             PlayerEntity.updatePlayer(gamePlayer);
         });
 

@@ -33,7 +33,7 @@ public class GamePlayer {
     private int level = 1;
     private int experience = 0;
     private Ability[] abilities;
-    private int mana;
+    private double mana;
 
     private ArrayList<Item> items = new ArrayList<>();
     private HashMap<Statistic, Double> statistics = new HashMap<>();
@@ -113,11 +113,11 @@ public class GamePlayer {
         return experience;
     }
 
-    public int getMana() {
+    public double getMana() {
         return mana;
     }
 
-    public void setMana(int mana) {
+    public void setMana(double mana) {
         this.mana = mana;
     }
 }
