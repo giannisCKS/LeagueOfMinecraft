@@ -18,10 +18,23 @@ public class AbilityVisualizer {
 
         for (int i = 1; i <= 4; i++) {
             Ability ability = gamePlayer.getAbility(i);
-            inventory.setItem(i, ItemUtils.makeItem(Material.INK_SACK, ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(), ability.getCurrentCooldown() == 0 ? 10 : 8, ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
+            inventory.setItem(i, ItemUtils.makeItem(Material.INK_SACK, ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(),
+                    ability.getCurrentCooldown() == 0 ? 10 : (gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() ? getColor(i) : 8)
+                    , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
 
             if (inventory.getHeldItemSlot() == i) ability.visualize(gamePlayer);
         }
+    }
+
+    private static int getColor(int i) {
+        switch (i) {
+            case 0: return 8;
+            case 1: return 6;
+            case 2: return 4;
+            case 3: return 2;
+            case 4: return 1;
+        }
+        return 0;
     }
 
     private static String[] formatText(String[] des) {
