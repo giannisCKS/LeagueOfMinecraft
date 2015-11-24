@@ -87,7 +87,7 @@ public class Desolve extends Ability {
             }
         }
 
-        setCooldown(cooldown());
+        setCooldown(cooldown(), player.getStatistic(Statistic.COOLDOWN_REDUCTION));
         player.setMana(player.getMana() - manaCost());
     }
 

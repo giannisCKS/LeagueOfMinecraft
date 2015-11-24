@@ -23,8 +23,8 @@ public abstract class Ability {
         return currentCooldown;
     }
 
-    public void setCooldown(int cooldown) {
-        currentCooldown = cooldown;
+    public void setCooldown(int cooldown, double reduction) {
+        currentCooldown = (int) (cooldown - cooldown * reduction);
     }
 
     public abstract void tick(GamePlayer player);

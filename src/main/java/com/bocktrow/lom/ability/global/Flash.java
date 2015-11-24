@@ -61,7 +61,7 @@ public class Flash extends Ability {
 
         player.getPlayer().teleport(location.clone().add(vector));
 
-        setCooldown(cooldown());
+        setCooldown(cooldown(), player.getStatistic(Statistic.COOLDOWN_REDUCTION));
     }
 
     @Override
