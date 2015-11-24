@@ -12,11 +12,11 @@ public class AbilityCaster implements Listener {
     @EventHandler
     public void interact(PlayerInteractEvent event) {
         if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
-                && (event.getPlayer().getInventory().getHeldItemSlot() >= 1 && event.getPlayer().getInventory().getHeldItemSlot() <= 4)) {
+                && (event.getPlayer().getInventory().getHeldItemSlot() >= 2 && event.getPlayer().getInventory().getHeldItemSlot() <= 5)) {
             if (GamePlayer.getGamePlayer(event.getPlayer()) != null) {
                 event.setCancelled(true);
                 GamePlayer gamePlayer = GamePlayer.getGamePlayer(event.getPlayer());
-                gamePlayer.getAbility(event.getPlayer().getInventory().getHeldItemSlot()).cast(gamePlayer, event);
+                gamePlayer.getAbility(event.getPlayer().getInventory().getHeldItemSlot() - 1).cast(gamePlayer, event);
             }
         }
 

@@ -16,13 +16,13 @@ public class AbilityVisualizer {
         Player player = gamePlayer.getPlayer();
         PlayerInventory inventory = player.getInventory();
 
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 0; i <= 4; i++) {
             Ability ability = gamePlayer.getAbility(i);
-            inventory.setItem(i, ItemUtils.makeItem(Material.INK_SACK, ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(),
-                    ability.getCurrentCooldown() == 0 && gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() ? getColor(i) : 8
+            inventory.setItem(i + 1, ItemUtils.makeItem(Material.INK_SACK, ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(),
+                    ability.getCurrentCooldown() == 0 && gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() && i != 0 ? getColor(i) : 8
                     , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
 
-            if (inventory.getHeldItemSlot() == i) ability.visualize(gamePlayer);
+            if (inventory.getHeldItemSlot() == i + 1) ability.visualize(gamePlayer);
         }
     }
 
