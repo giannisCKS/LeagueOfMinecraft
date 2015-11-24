@@ -15,7 +15,7 @@ public class EntityPrepare {
     public static void updatePlayer(GamePlayer gamePlayer) {
         Player player = gamePlayer.getPlayer();
         player.setMaxHealth(gamePlayer.getStatistic(Statistic.HEALTH));
-        player.setHealthScale(player.getMaxHealth());
+        player.setHealthScale(20.0);
         player.setFoodLevel(25);
 
         player.setLevel(gamePlayer.getLevel());
