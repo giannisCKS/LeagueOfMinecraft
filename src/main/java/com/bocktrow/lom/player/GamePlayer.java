@@ -44,6 +44,7 @@ public class GamePlayer {
 
         abilities = champion.getAbilitySet();
         ScoreboardVisualizer.init(player);
+        EntityPrepare.initPlayer(this);
     }
 
     public static HashMap<Player, GamePlayer> getGamePlayers() {
@@ -101,5 +102,13 @@ public class GamePlayer {
 
     public Ability[] getAbilities() {
         return abilities;
+    }
+
+    public int getExperienceForNext() {
+        return 500;
+    }
+
+    public int getExperience() {
+        return experience;
     }
 }
