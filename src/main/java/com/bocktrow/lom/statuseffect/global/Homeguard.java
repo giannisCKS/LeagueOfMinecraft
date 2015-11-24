@@ -10,7 +10,7 @@ public class Homeguard extends StatusEffect {
     public double mvmsp = 100D;
 
     public Homeguard(String source) {
-        super(100, source);
+        super(200, source);
         getBonusStats().put(Statistic.MOVEMENT_SPEED, mvmsp);
     }
 
@@ -31,7 +31,7 @@ public class Homeguard extends StatusEffect {
 
     @Override
     public void effectTick(GamePlayer gamePlayer) {
-        mvmsp--;
+        mvmsp-= 0.5;
         getBonusStats().put(Statistic.MOVEMENT_SPEED, mvmsp);
     }
 }

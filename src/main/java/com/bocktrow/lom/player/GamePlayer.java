@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class GamePlayer {
 
@@ -110,12 +111,15 @@ public class GamePlayer {
         calculateStatsFromItems();
         calculateExperience();
 
-        statusEffects.stream().forEach(statusEffect -> {
+        Iterator<StatusEffect> iterator = statusEffects.iterator();
+        while (iterator.hasNext()) {
+            StatusEffect statusEffect = iterator.next();
             statusEffect.tick(this);
             if (statusEffect.getDuration() == 0) {
                 statusEffects.remove(statusEffect);
+                return;
             }
-        });
+        }
     }
 
     public ArrayList<StatusEffect> getStatusEffects() {

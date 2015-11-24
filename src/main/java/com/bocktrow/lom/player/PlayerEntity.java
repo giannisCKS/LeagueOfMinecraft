@@ -30,9 +30,9 @@ public class PlayerEntity {
     public static void tickPlayer(GamePlayer gamePlayer) {
         gamePlayer.tick();
         gamePlayer.setMana(gamePlayer.getMana() < gamePlayer.getStatistic(Statistic.MANA) ?
-                gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D) : gamePlayer.getStatistic(Statistic.MANA));
-        gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getMaxHealth() > gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) ?
-                gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) : gamePlayer.getPlayer().getMaxHealth());
+                gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 20D) : gamePlayer.getStatistic(Statistic.MANA));
+        gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getMaxHealth() > gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 20D) ?
+                gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 20D) : gamePlayer.getPlayer().getMaxHealth());
 
         ItemStack itemStack = new ItemStack(Material.LEATHER_BOOTS);
         gamePlayer.getPlayer().getInventory().setBoots(attributes(itemStack, gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED) / 100));
