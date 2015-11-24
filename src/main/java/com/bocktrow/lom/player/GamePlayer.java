@@ -7,6 +7,7 @@ import com.bocktrow.lom.item.Item;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.statuseffect.StatusEffect;
+import com.bocktrow.lom.statuseffect.global.Homeguard;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -60,7 +61,13 @@ public class GamePlayer {
     }
 
     public double getStatistic(Statistic statistic) {
-        return champion.getBaseStat(statistic) + (1 - level) * champion.getBaseStatIncr(statistic) + (statistics.containsKey(Statistic.ABILITY_POWER) ? statistics.get(Statistic.ABILITY_POWER) : 0);
+        double stat = champion.getBaseStat(statistic) + (1 - level) * champion.getBaseStatIncr(statistic) + (statistics.containsKey(Statistic.ABILITY_POWER) ? statistics.get(Statistic.ABILITY_POWER) : 0);
+        for (StatusEffect statusEffect : statusEffects) {
+            if (statusEffect.getBonusStats().containsKey(statistic)) {
+                stat += statusEffect.getBonusStats().get(statistic);
+            }
+        }
+        return stat;
     }
 
     public int getLevel() {
@@ -137,5 +144,16 @@ public class GamePlayer {
 
     public Ability getSummonerSpell() {
         return new Flash();
+    }
+
+    public void addStatusEffect(StatusEffect statusEffect) {
+        for (StatusEffect statusEffect1 : statusEffects) {
+            if (statusEffect1.getEffect() == statusEffect.getEffect()) {
+                statusEffects.remove(statusEffect1);
+                break;
+            }
+        }
+
+        statusEffects.add(statusEffect);
     }
 }
