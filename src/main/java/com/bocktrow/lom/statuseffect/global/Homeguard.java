@@ -7,9 +7,11 @@ import com.bocktrow.lom.statuseffect.StatusEffect;
 
 public class Homeguard extends StatusEffect {
 
+    public double mvmsp = 100D;
+
     public Homeguard(String source) {
-        super(50, source);
-        getBonusStats().put(Statistic.MOVEMENT_SPEED, 100D);
+        super(100, source);
+        getBonusStats().put(Statistic.MOVEMENT_SPEED, mvmsp);
     }
 
     @Override
@@ -29,6 +31,7 @@ public class Homeguard extends StatusEffect {
 
     @Override
     public void effectTick(GamePlayer gamePlayer) {
-
+        mvmsp--;
+        getBonusStats().put(Statistic.MOVEMENT_SPEED, mvmsp);
     }
 }
