@@ -12,7 +12,7 @@ public class TextHandler {
         String mana = ((int) gamePlayer.getMana()) + "/" + ((int) gamePlayer.getStatistic(Statistic.MANA));
 
         ActionBarUtil.sendToPlayer(ChatColor.GREEN + "" + ChatColor.BOLD + "HP: " + ChatColor.RESET + "" + ChatColor.GREEN + health + "     " +
-                ChatColor.AQUA + "" + ChatColor.BOLD + "Mana: " + ChatColor.RESET + "" + ChatColor.AQUA + health, gamePlayer.getPlayer()
+                ChatColor.AQUA + "" + ChatColor.BOLD + "Mana: " + ChatColor.RESET + "" + ChatColor.AQUA + mana, gamePlayer.getPlayer()
         );
     }
 
