@@ -62,6 +62,7 @@ public class Desolve extends Ability {
     @Override
     public void cast(GamePlayer player, PlayerInteractEvent event) {
         if (getCurrentCooldown() != 0) return;
+        if (player.getMana() < manaCost()) return;
 
         Location location = player.getPlayer().getEyeLocation();
         Vector vector = player.getPlayer().getEyeLocation().getDirection();
@@ -86,6 +87,7 @@ public class Desolve extends Ability {
         }
 
         setCooldown(cooldown());
+        player.setMana(player.getMana() - manaCost());
     }
 
     @Override

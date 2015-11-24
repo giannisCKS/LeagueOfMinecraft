@@ -116,4 +116,8 @@ public class GamePlayer {
     public int getMana() {
         return mana;
     }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
 }
