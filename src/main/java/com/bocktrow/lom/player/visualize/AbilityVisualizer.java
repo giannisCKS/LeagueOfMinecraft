@@ -20,7 +20,9 @@ public class AbilityVisualizer {
             Ability ability = gamePlayer.getAbility(i);
             inventory.setItem(i, ItemUtils.makeItem(getMaterial(i), ability.getCurrentCooldown() == 0 ? 1 : (ability.getCurrentCooldown() >= 64 ? 64 : ability.getCurrentCooldown()),
                     ability.getCurrentCooldown() == 0 && gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() && i != 0 ? getColor(i) : 8
-                    , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
+                    , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName() + ChatColor.GRAY +
+                            " (" + (ability.getCurrentCooldown() != 0 ? ability.getCurrentCooldown() + "s" : (gamePlayer.getMana() >= ability.manaCost()) ? ChatColor.YELLOW  + "" + i  : "No Mana") + ChatColor.GRAY +  ")"
+                    ,formatText(ability.getDescription(gamePlayer))));
 
             if (inventory.getHeldItemSlot() == i) ability.visualize(gamePlayer);
         }
