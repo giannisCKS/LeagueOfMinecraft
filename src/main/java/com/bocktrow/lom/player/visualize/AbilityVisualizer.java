@@ -16,9 +16,9 @@ public class AbilityVisualizer {
         Player player = gamePlayer.getPlayer();
         PlayerInventory inventory = player.getInventory();
 
-        for (int i = 0; i <= 4; i++) {
+        for (int i = 0; i <= 6; i++) {
             Ability ability = gamePlayer.getAbility(i);
-            inventory.setItem(i, ItemUtils.makeItem(Material.INK_SACK, ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(),
+            inventory.setItem(i, ItemUtils.makeItem(getMaterial(i), ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(),
                     ability.getCurrentCooldown() == 0 && gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() && i != 0 ? getColor(i) : 8
                     , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
 
@@ -28,6 +28,11 @@ public class AbilityVisualizer {
         inventory.setItem(8, ItemUtils.makeItem(Material.STICK, ChatColor.GOLD + "" + ChatColor.BOLD + "Basic Attack"));
     }
 
+    private static Material getMaterial(int i) {
+        if (i == 6) return Material.ENDER_PEARL;
+        return Material.INK_SACK;
+    }
+
     private static int getColor(int i) {
         switch (i) {
             case 0: return 8;
@@ -35,6 +40,8 @@ public class AbilityVisualizer {
             case 2: return 4;
             case 3: return 2;
             case 4: return 1;
+            case 5: return 11;
+            case 6: return 0;
         }
         return 0;
     }

@@ -1,6 +1,8 @@
 package com.bocktrow.lom.champion;
 
 import com.bocktrow.lom.ability.Ability;
+import com.bocktrow.lom.ability.global.Recall;
+import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
 
 import java.util.Arrays;
@@ -17,7 +19,7 @@ public abstract class Champion {
     public abstract Class<? extends Ability> getAbility3();
     public abstract Class<? extends Ability> getAbility4();
 
-    public Ability[] getAbilitySet() {
+    public Ability[] getAbilitySet(GamePlayer gamePlayer) {
         Ability[] abilities = new Ability[5];
         try {
             abilities = new Ability[]{
@@ -25,7 +27,9 @@ public abstract class Champion {
                     getAbility1().newInstance(),
                     getAbility2().newInstance(),
                     getAbility3().newInstance(),
-                    getAbility4().newInstance()
+                    getAbility4().newInstance(),
+                    gamePlayer.getSummonerSpell(),
+                    new Recall()
             };
         } catch (InstantiationException | IllegalAccessException e) {
             Arrays.fill(abilities, null);

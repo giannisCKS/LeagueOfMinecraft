@@ -13,7 +13,7 @@ public class AbilityCaster implements Listener {
     @EventHandler
     public void interact(PlayerInteractEvent event) {
         if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)
-                && (event.getPlayer().getInventory().getHeldItemSlot() >= 1 && event.getPlayer().getInventory().getHeldItemSlot() <= 4)) {
+                && (event.getPlayer().getInventory().getHeldItemSlot() >= 1 && event.getPlayer().getInventory().getHeldItemSlot() <= 6)) {
             if (GamePlayer.getGamePlayer(event.getPlayer()) != null) {
                 event.setCancelled(true);
                 GamePlayer gamePlayer = GamePlayer.getGamePlayer(event.getPlayer());
@@ -26,7 +26,7 @@ public class AbilityCaster implements Listener {
     @EventHandler
     public void switchSlot(PlayerItemHeldEvent event) {
         if (event.getPreviousSlot() == 8 && GamePlayer.getGamePlayer(event.getPlayer()) != null) {
-            if (event.getNewSlot() >= 1 && event.getNewSlot() <= 4) {
+            if (event.getNewSlot() >= 1 && event.getNewSlot() <= 6) {
                 GamePlayer gamePlayer = GamePlayer.getGamePlayer(event.getPlayer());
                 gamePlayer.getAbility(event.getNewSlot()).cast(gamePlayer, null);
                 event.setCancelled(true);

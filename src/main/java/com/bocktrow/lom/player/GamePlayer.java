@@ -1,6 +1,7 @@
 package com.bocktrow.lom.player;
 
 import com.bocktrow.lom.ability.Ability;
+import com.bocktrow.lom.ability.global.Flash;
 import com.bocktrow.lom.champion.Champion;
 import com.bocktrow.lom.item.Item;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
@@ -43,7 +44,7 @@ public class GamePlayer {
         this.player = player;
 
         mana = (int) getStatistic(Statistic.MANA);
-        abilities = champion.getAbilitySet();
+        abilities = champion.getAbilitySet(this);
         ScoreboardVisualizer.init(player);
         PlayerEntity.initPlayer(this);
     }
@@ -119,5 +120,9 @@ public class GamePlayer {
 
     public void setMana(double mana) {
         this.mana = mana;
+    }
+
+    public Ability getSummonerSpell() {
+        return new Flash();
     }
 }
