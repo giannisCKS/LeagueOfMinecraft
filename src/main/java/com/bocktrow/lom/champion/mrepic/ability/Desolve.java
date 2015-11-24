@@ -35,6 +35,7 @@ public class Desolve extends Ability {
         return true;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void visualize(GamePlayer player) {
         Player player1 = player.getPlayer();
