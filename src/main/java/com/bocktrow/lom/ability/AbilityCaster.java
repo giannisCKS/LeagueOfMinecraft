@@ -29,7 +29,7 @@ public class AbilityCaster implements Listener {
             if (event.getNewSlot() >= 1 && event.getNewSlot() <= 6) {
                 GamePlayer gamePlayer = GamePlayer.getGamePlayer(event.getPlayer());
                 gamePlayer.getAbility(event.getNewSlot()).cast(gamePlayer, null);
-                event.setCancelled(true);
+                if (!gamePlayer.getAbility(event.getNewSlot()).isChanneled()) event.setCancelled(true);
             }
         }
     }

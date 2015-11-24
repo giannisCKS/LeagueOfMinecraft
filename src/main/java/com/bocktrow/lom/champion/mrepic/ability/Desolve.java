@@ -4,6 +4,7 @@ import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.utils.ParticleEffect;
+import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,12 +28,21 @@ public class Desolve extends Ability {
 
     @Override
     public String[] getDescription(GamePlayer player) {
-        return new String[]{"Causes an explosion that deals [Y]" + player.getStatistic(Statistic.ABILITY_POWER) + " magic damage [G]to enemy units!"};
+
+        String cooldown = player.getStatistic(Statistic.COOLDOWN_REDUCTION) == 0 ? cooldown() + "s" :
+                ((int) (cooldown() - (player.getStatistic(Statistic.COOLDOWN_REDUCTION) * cooldown()))) + "s" + ChatColor.GRAY +  " (Base: " + cooldown() + "s)";
+
+        return new String[]{"Causes an explosion that deals [Y]" + player.getStatistic(Statistic.ABILITY_POWER) + " magic damage [G]to enemy units!", "", ChatColor.GRAY + "Cooldown: " + ChatColor.AQUA + cooldown};
     }
 
     @Override
     public boolean isCastable() {
         return true;
+    }
+
+    @Override
+    public boolean isChanneled() {
+        return false;
     }
 
     @SuppressWarnings("Duplicates")

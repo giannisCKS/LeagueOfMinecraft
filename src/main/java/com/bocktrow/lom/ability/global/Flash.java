@@ -5,6 +5,7 @@ import com.bocktrow.lom.ability.Ability;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.utils.ParticleEffect;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,12 +20,21 @@ public class Flash extends Ability {
 
     @Override
     public String[] getDescription(GamePlayer player) {
-        return new String[]{"Teleports you instantly 5 meters away."};
+
+        String cooldown = player.getStatistic(Statistic.COOLDOWN_REDUCTION) == 0 ? cooldown() + "s" :
+                ((int) (cooldown() - (player.getStatistic(Statistic.COOLDOWN_REDUCTION) * cooldown()))) + "s" + ChatColor.GRAY +  " (Base: " + cooldown() + "s)";
+
+        return new String[]{"Teleports you instantly 5 meters away.", "", ChatColor.GRAY + "Cooldown: " + ChatColor.AQUA + cooldown};
     }
 
     @Override
     public boolean isCastable() {
         return true;
+    }
+
+    @Override
+    public boolean isChanneled() {
+        return false;
     }
 
     @Override

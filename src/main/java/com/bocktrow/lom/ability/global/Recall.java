@@ -22,6 +22,11 @@ public class Recall extends Ability {
     }
 
     @Override
+    public boolean isChanneled() {
+        return true;
+    }
+
+    @Override
     public void visualize(GamePlayer player) {
 
     }
