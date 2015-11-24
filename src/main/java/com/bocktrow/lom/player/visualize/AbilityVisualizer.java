@@ -18,7 +18,7 @@ public class AbilityVisualizer {
 
         for (int i = 0; i <= 6; i++) {
             Ability ability = gamePlayer.getAbility(i);
-            inventory.setItem(i, ItemUtils.makeItem(getMaterial(i), ability.getCurrentCooldown() == 0 ? 1 : ability.getCurrentCooldown(),
+            inventory.setItem(i, ItemUtils.makeItem(getMaterial(i), ability.getCurrentCooldown() == 0 ? 1 : (ability.getCurrentCooldown() >= 64 ? 64 : ability.getCurrentCooldown()),
                     ability.getCurrentCooldown() == 0 && gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() && i != 0 ? getColor(i) : 8
                     , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName(),formatText(ability.getDescription(gamePlayer))));
 

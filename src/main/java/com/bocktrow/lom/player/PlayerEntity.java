@@ -27,7 +27,7 @@ public class PlayerEntity {
         gamePlayer.setMana(gamePlayer.getMana() < gamePlayer.getStatistic(Statistic.MANA) ?
                 gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D) : gamePlayer.getStatistic(Statistic.MANA));
         gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getHealth() < gamePlayer.getStatistic(Statistic.HEALTH) ?
-                gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) : gamePlayer.getStatistic(Statistic.HEALTH));
+                gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) : gamePlayer.getPlayer().getMaxHealth());
     }
 
 }
