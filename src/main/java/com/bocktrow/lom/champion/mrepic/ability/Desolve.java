@@ -32,7 +32,7 @@ public class Desolve extends Ability {
 
     @Override
     public boolean isCastable() {
-        return false;
+        return true;
     }
 
     @Override

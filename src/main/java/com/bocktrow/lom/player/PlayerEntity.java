@@ -24,7 +24,7 @@ public class PlayerEntity {
 
     public static void tickPlayer(GamePlayer gamePlayer) {
         gamePlayer.tick();
-        gamePlayer.setMana(gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D));
+        if (gamePlayer.getMana() < gamePlayer.getStatistic(Statistic.MANA)) gamePlayer.setMana(gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D));
     }
 
 }
