@@ -24,10 +24,10 @@ public class PlayerEntity {
 
     public static void tickPlayer(GamePlayer gamePlayer) {
         gamePlayer.tick();
-        if (gamePlayer.getMana() < gamePlayer.getStatistic(Statistic.MANA))
-            gamePlayer.setMana(gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D));
-        if (gamePlayer.getPlayer().getHealth() < gamePlayer.getStatistic(Statistic.HEALTH))
-            gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH) / 10D));
+        gamePlayer.setMana(gamePlayer.getMana() < gamePlayer.getStatistic(Statistic.MANA) ?
+                gamePlayer.getMana() + (gamePlayer.getStatistic(Statistic.MANA_REGEN) / 10D) : gamePlayer.getStatistic(Statistic.MANA));
+        gamePlayer.getPlayer().setHealth(gamePlayer.getPlayer().getHealth() < gamePlayer.getStatistic(Statistic.HEALTH) ?
+                gamePlayer.getPlayer().getHealth() + (gamePlayer.getStatistic(Statistic.HEALTH_REGEN) / 10D) : gamePlayer.getStatistic(Statistic.HEALTH));
     }
 
 }
