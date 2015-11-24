@@ -29,12 +29,6 @@ public class Flash extends Ability {
 
     @Override
     public void visualize(GamePlayer player) {
-
-    }
-
-    @SuppressWarnings("Duplicates")
-    @Override
-    public void cast(GamePlayer player, PlayerInteractEvent event) {
         Player player1 = player.getPlayer();
         Location location = player1.getLocation();
 
@@ -55,7 +49,7 @@ public class Flash extends Ability {
     }
 
     @Override
-    public void tick(GamePlayer player) {
+    public void cast(GamePlayer player, PlayerInteractEvent event) {
         if (getCurrentCooldown() != 0) return;
 
         Location location = player.getPlayer().getEyeLocation();
@@ -68,6 +62,11 @@ public class Flash extends Ability {
         player.getPlayer().teleport(location.clone().add(vector));
 
         setCooldown(cooldown());
+    }
+
+    @Override
+    public void tick(GamePlayer player) {
+
     }
 
     @Override
