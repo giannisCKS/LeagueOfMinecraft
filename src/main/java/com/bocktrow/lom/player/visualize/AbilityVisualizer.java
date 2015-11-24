@@ -18,10 +18,14 @@ public class AbilityVisualizer {
 
         for (int i = 0; i <= 6; i++) {
             Ability ability = gamePlayer.getAbility(i);
+
+            String extra = "";
+            if (ability.isCastable() && i != 0) extra =  ChatColor.GRAY +
+                    " (" + (ability.getCurrentCooldown() != 0 ? ability.getCurrentCooldown() + "s" : (gamePlayer.getMana() >= ability.manaCost()) ? ChatColor.YELLOW  + "" + i  : "No Mana") + ChatColor.GRAY +  ")";
+
             inventory.setItem(i, ItemUtils.makeItem(getMaterial(i), ability.getCurrentCooldown() == 0 ? 1 : (ability.getCurrentCooldown() >= 64 ? 64 : ability.getCurrentCooldown()),
                     ability.getCurrentCooldown() == 0 && gamePlayer.getMana() >= ability.manaCost() && ability.isCastable() && i != 0 ? getColor(i) : 8
-                    , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName() + ChatColor.GRAY +
-                            " (" + (ability.getCurrentCooldown() != 0 ? ability.getCurrentCooldown() + "s" : (gamePlayer.getMana() >= ability.manaCost()) ? ChatColor.YELLOW  + "" + i  : "No Mana") + ChatColor.GRAY +  ")"
+                    , ChatColor.YELLOW + "" + ChatColor.BOLD + ability.getName() + extra
                     ,formatText(ability.getDescription(gamePlayer))));
 
             if (inventory.getHeldItemSlot() == i) ability.visualize(gamePlayer);
