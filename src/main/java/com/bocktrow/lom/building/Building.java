@@ -3,6 +3,7 @@ package com.bocktrow.lom.building;
 import com.bocktrow.lom.team.Team;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
 
 import java.util.ArrayList;
 
@@ -13,7 +14,8 @@ public abstract class Building {
     private ArrayList<Block> blocks = new ArrayList<>();
     private ArrayList<Block> functionalBlcoks = new ArrayList<>();
     private boolean isOperational = true;
-    private double health;
+    private double health, maxhealth;
+    private ArmorStand armorStand;
 
     public Building(Team team, Block center, Block top, ArrayList<Block> blocks, ArrayList<Block> functionalBlcoks, double health) {
         this.team = team;
@@ -22,6 +24,8 @@ public abstract class Building {
         this.blocks = blocks;
         this.functionalBlcoks = functionalBlcoks;
         this.health = health;
+
+        maxhealth = health;
     }
 
     public ArrayList<Block> getBlocks() {
@@ -73,6 +77,7 @@ public abstract class Building {
 
     public abstract void tick();
     public abstract void onDestroy();
+    public abstract boolean isDestroyable();
 
 
 }

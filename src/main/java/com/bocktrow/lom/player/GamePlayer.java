@@ -34,6 +34,7 @@ public class GamePlayer {
 
     private Champion champion;
     private Player player;
+    private boolean dead = false;
     private int level = 1;
     private int experience = 0;
     private Ability[] abilities;
@@ -55,6 +56,10 @@ public class GamePlayer {
 
     public static HashMap<Player, GamePlayer> getGamePlayers() {
         return gamePlayers;
+    }
+
+    public boolean isDead() {
+        return dead;
     }
 
     public Player getPlayer() {
@@ -111,6 +116,8 @@ public class GamePlayer {
         calculateStatsFromItems();
         calculateExperience();
 
+        if (isDead()) return;
+
         Iterator<StatusEffect> iterator = statusEffects.iterator();
         while (iterator.hasNext()) {
             StatusEffect statusEffect = iterator.next();
@@ -159,5 +166,9 @@ public class GamePlayer {
         }
 
         statusEffects.add(statusEffect);
+    }
+
+    public void onDeath() {
+
     }
 }

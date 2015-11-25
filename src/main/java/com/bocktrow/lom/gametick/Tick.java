@@ -31,6 +31,9 @@ public class Tick {
 
             if (currentTick % 8 == 0) ScoreboardVisualizer.visualize(gamePlayer);
             AbilityVisualizer.visualize(gamePlayer);
+
+            if (gamePlayer.isDead()) return;
+
             TextHandler.visualize(gamePlayer);
             PlayerEntity.tickPlayer(gamePlayer);
             PlayerEntity.updatePlayer(gamePlayer);
