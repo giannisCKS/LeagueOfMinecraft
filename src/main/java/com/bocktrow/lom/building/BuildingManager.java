@@ -1,6 +1,7 @@
 package com.bocktrow.lom.building;
 
 import com.bocktrow.lom.LeagueOfMinecraft;
+import com.bocktrow.lom.building.tower.Tower;
 import com.bocktrow.lom.team.Team;
 import com.sk89q.worldedit.CuboidClipboard;
 import com.sk89q.worldedit.EditSession;
@@ -14,14 +15,20 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 import org.apache.commons.lang.SystemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.block.Block;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 @SuppressWarnings("deprecation")
 public class BuildingManager {
 
     private static String escapeCharacterForFiles = "\\";
+    private static ArrayList<Building> buildings = new ArrayList<>();
 
     public static void init() {
         buildNexus(new Location(Bukkit.getWorld("world"), 50, 3, 0), Team.RED);
@@ -32,6 +39,10 @@ public class BuildingManager {
 
         buildTower(new Location(Bukkit.getWorld("world"), 41, 3, 4), Team.RED);
         buildTower(new Location(Bukkit.getWorld("world"), 41, 3, -4), Team.RED);
+
+        Bukkit.getScheduler().runTaskTimer(LeagueOfMinecraft.INSTANCE, () -> {
+            buildings.stream().forEach(Building::tick);
+        }, 1L, 1L);
     }
 
     public static void buildNexus(Location location, Team team) {
@@ -108,19 +119,47 @@ public class BuildingManager {
             BukkitWorld world = new BukkitWorld(Bukkit.getWorld("world"));
             EditSession session = new EditSession(world, 1000000);
 
+            org.bukkit.util.Vector vector = location.toVector();
+
             color(region, team);
+
 
             if (team == Team.RED) {
                 region.rotate2D(180);
             }
 
-            org.bukkit.util.Vector vector = location.toVector();
             region.paste(session, new Vector(vector.getX(), vector.getY(), vector.getZ()), false);
+
+
+            ArrayList<Block> blocks = getBlocks(region, new Vector(vector.getX(), vector.getY(), vector.getZ()).add(region.getOffset()), world.getWorld());
+            Block block = location.getBlock().getRelative(team == Team.BLUE ? 1 : -1 , 4, 0);
+            ArrayList<Block> blocks2 = new ArrayList<>(); blocks2.add(block);
+            Tower tower = new Tower(team, location.getBlock(), blocks, blocks2, true);
+
+            buildings.add(tower);
 
         } catch (IOException | DataException | MaxChangedBlocksException e) {
             e.printStackTrace();
         }
 
+    }
+
+    private static ArrayList<Block> getBlocks(CuboidClipboard region, Vector vector, World world) {
+        ArrayList<Block> blocks = new ArrayList<>();
+        for (int y = 0; y < region.getHeight() + 1; ++y) {
+            for (int x = 0; x < region.getWidth(); ++x) {
+                for (int z = 0; z < region.getLength(); ++z) {
+                    try {
+                        final BaseBlock block = region.getBlock(new Vector(x, y, z));
+                        if (block != null && !block.isAir()) {
+                            world.getBlockAt(vector.getBlockX() + x, vector.getBlockY() + y, vector.getBlockZ() + z);
+                        }
+
+                    } catch (ArrayIndexOutOfBoundsException ignored) {}
+                }
+            }
+        }
+        return null;
     }
 
 }
