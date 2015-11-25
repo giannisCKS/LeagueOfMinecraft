@@ -41,6 +41,9 @@ public class GamePlayer {
     private double mana;
     private ArrayList<StatusEffect> statusEffects = new ArrayList<>();
 
+    private int kills = 0, deaths = 0, assists = 0;
+    private int gold = 0;
+
     private ArrayList<Item> items = new ArrayList<>();
     private HashMap<Statistic, Double> statistics = new HashMap<>();
 
@@ -171,5 +174,37 @@ public class GamePlayer {
     public void die() {
         dead = true;
         statusEffects.clear();
+    }
+
+    public int getKills() {
+        return kills;
+    }
+
+    public int getDeaths() {
+        return deaths;
+    }
+
+    public int getAssists() {
+        return assists;
+    }
+
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    public void setDeaths(int deaths) {
+        this.deaths = deaths;
+    }
+
+    public void setAssists(int assists) {
+        this.assists = assists;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public int getGold() {
+        return gold;
     }
 }

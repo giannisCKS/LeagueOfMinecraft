@@ -29,20 +29,26 @@ public class ScoreboardVisualizer {
             }
 
             Objective objective = scoreboard.registerNewObjective("gameSidebar", "dummy");
+            int slot = 20;
+
+
             objective.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
 
-            objective.getScore(ChatColor.YELLOW + "").setScore(10);
+            objective.getScore(ChatColor.RED + "").setScore(--slot);
+            objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Score:").setScore(--slot);
+            objective.getScore(ChatColor.YELLOW + "" + gamePlayer.getKills() + "/" + gamePlayer.getDeaths() + "/" + gamePlayer.getAssists()).setScore(--slot);
+            objective.getScore(ChatColor.GREEN + "").setScore(--slot);
+            objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold:").setScore(--slot);
+            objective.getScore(ChatColor.YELLOW + "⛃ " + gamePlayer.getGold()).setScore(--slot);
 
+            if (gamePlayer.getStatusEffects().size() != 0) {
+                objective.getScore(ChatColor.YELLOW + "").setScore(--slot);
                 objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Active effects:").setScore(9);
-                Iterator<StatusEffect> statusEffectIterator = gamePlayer.getStatusEffects().iterator();
-                int score = 8;
-                while (statusEffectIterator.hasNext() && score > 0) {
-                    StatusEffect statusEffect = statusEffectIterator.next();
-                    objective.getScore((statusEffect.isPositive() ? ChatColor.GREEN : ChatColor.RED) +
-                            statusEffect.getName() + ChatColor.GRAY + " (" + (statusEffect.getDuration() / 20) + "s)").setScore(score--);
-                }
-
-            objective.getScore(ChatColor.RED + "").setScore(0);
+            }
+            for (StatusEffect statusEffect : gamePlayer.getStatusEffects()) {
+                objective.getScore((statusEffect.isPositive() ? ChatColor.GREEN : ChatColor.RED) +
+                        statusEffect.getName() + ChatColor.GRAY + " (" + (statusEffect.getDuration() / 20) + "s)").setScore(--slot);
+            }
 
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         });

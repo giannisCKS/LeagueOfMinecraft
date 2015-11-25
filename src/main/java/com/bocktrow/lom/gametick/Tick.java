@@ -27,6 +27,7 @@ public class Tick {
                 for (Ability ability : gamePlayer.getAbilities()) {
                     ability.decreaseCooldown();
                 }
+                gamePlayer.setGold(gamePlayer.getGold() + 1);
             }
 
             if (currentTick % 8 == 0) ScoreboardVisualizer.visualize(gamePlayer);
