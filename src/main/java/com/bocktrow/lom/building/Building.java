@@ -29,7 +29,7 @@ public abstract class Building {
 
         maxhealth = health;
 
-        armorStand = (ArmorStand) top.getWorld().spawnEntity(top.getLocation().add(0.5, 0, 0.5), EntityType.ARMOR_STAND);
+        armorStand = (ArmorStand) top.getWorld().spawnEntity(top.getLocation().add(0.5, -0.5, 0.5), EntityType.ARMOR_STAND);
         armorStand.setGravity(false);
         armorStand.setVisible(false);
         armorStand.setCustomNameVisible(true);
@@ -90,7 +90,7 @@ public abstract class Building {
     public void atick() {
         tick();
 
-        String hbar = ChatColor.GREEN + "";
+        String hbar = ChatColor.RED + "";
         int boxes = 10;
         int gboxes = (int) ((health / maxhealth) * 10);
 
@@ -108,6 +108,6 @@ public abstract class Building {
         }
 
 
-        armorStand.setCustomName(ChatColor.YELLOW + "" + ChatColor.BOLD + "" + ((int) health) + " " + ChatColor.RESET + hbar + " " + ChatColor.YELLOW + ((int) maxhealth));
+        armorStand.setCustomName(ChatColor.AQUA + "" + ((int) health) + " " + ChatColor.RESET + hbar + " " + ChatColor.GOLD + ((int) maxhealth));
     }
 }
