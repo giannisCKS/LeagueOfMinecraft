@@ -45,12 +45,12 @@ public class Tower extends Building {
                     double dist = entity.getLocation().distance(location);
 
                     for (int i = 0; i <= 50; i++) {
-                        Location loc = location.subtract(vector);
+                        Location loc = location.subtract(vector.clone().multiply(0.5));
 
                         if (loc.distance(entity.getLocation()) > dist) continue;
 
                         ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, loc, 20);
-                        vector.add(vectorInit).multiply(0.5);
+                        vector.add(vectorInit);
                     }
                 }
             }
