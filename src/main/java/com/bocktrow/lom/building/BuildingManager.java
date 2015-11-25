@@ -44,32 +44,34 @@ public class BuildingManager {
             for (int y = 0; y < region.getHeight() + 1; ++y) {
                 for (int x = 0; x < region.getWidth(); ++x) {
                     for (int z = 0; z < region.getLength(); ++z) {
-                        final BaseBlock block = region.getBlock(new Vector(x, y, z));
+                        try {
+                            final BaseBlock block = region.getBlock(new Vector(x, y, z));
 
-                        if (block == null) {
-                            continue;
-                        }
+                            if (block == null) {
+                                continue;
+                            }
 
-                        switch (block.getType()) {
-                            case (19):
-                                block.setType(35);
-                                break;
-                            case (35):
-                            case (95):
-                            case (171):
-                                switch (team) {
-                                    case BLUE:
-                                        block.setData(11);
-                                        break;
-                                    case RED:
-                                        block.setData(14);
-                                        break;
-                                }
-                                break;
-                            default: continue;
-                        }
+                            switch (block.getType()) {
+                                case (19):
+                                    block.setType(35);
+                                    break;
+                                case (35):
+                                case (95):
+                                case (171):
+                                    switch (team) {
+                                        case BLUE:
+                                            block.setData(11);
+                                            break;
+                                        case RED:
+                                            block.setData(14);
+                                            break;
+                                    }
+                                    break;
+                                default: continue;
+                            }
+                            region.setBlock(new Vector(x, y, z), block);
 
-                        region.setBlock(new Vector(x, y, z), block);
+                        } catch (ArrayIndexOutOfBoundsException ignored) {}
                     }
                 }
             }
