@@ -27,18 +27,28 @@ public class Tower extends Building {
     public void tick() {
         Block block = getFunctionalBlcoks().get(0);
         Location location = block.getLocation().add(0.5, 0.5, 0.5);
-        block.getWorld().getLivingEntities().stream().filter(entity -> location.distance(entity.getLocation()) <= 8 && entity instanceof Player).forEach(entity -> {
-            Vector vector = location.toVector().add(entity.getEyeLocation().toVector());
 
-            Vector cut = vector.normalize().multiply(0.1);
-            Vector work = cut.clone();
+        for (LivingEntity entity : getCenter().getWorld().getLivingEntities()) {
+            if ((entity instanceof Player)) {
+                if (entity.getLocation().distance(location) <= 7) {
 
-            while (vector.length() > work.length()) {
-                ParticleEffect.FLAME.display(.1F, .1F, .1F, 0, 10, location.clone().add(work), 24);
-                work.add(cut);
+                    Vector vector = new Vector(location.getX() - entity.getEyeLocation().getX(),
+                            location.getY() - entity.getEyeLocation().getY() + 1,
+                            location.getZ() - entity.getEyeLocation().getZ());
+
+                    vector = vector.multiply(0.05);
+
+                    Vector vectorInit = vector.clone();
+
+                    for (int i = 0; i <= 19; i++) {
+                        ParticleEffect.SPELL_WITCH.display(0F, 0F, 0F, 0, 3, location.subtract(vector), 20);
+                        vector.add(vectorInit);
+                    }
+                }
             }
-        });
+        }
     }
+}
 
     @Override
     public void onDestroy() {
