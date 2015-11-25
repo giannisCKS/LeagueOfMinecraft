@@ -42,7 +42,7 @@ public class Tower extends Building {
 
                     entity.damage(8);
 
-                    double dist = entity.getLocation().distance(location);
+                    double dist = entity.getLocation().distance(location) / 2;
 
                     for (int i = 0; i <= 50; i++) {
                         Location loc = location.subtract(vector.clone().multiply(0.5));
