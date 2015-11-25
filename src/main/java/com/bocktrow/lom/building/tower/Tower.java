@@ -41,8 +41,10 @@ public class Tower extends Building {
                     Vector vectorInit = vector.clone();
 
                     for (int i = 0; i <= 30; i++) {
-                        ParticleEffect.SPELL_WITCH.display(0F, 0F, 0F, 0, 3, location.subtract(vector), 20);
+                        ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, location.subtract(vector), 20);
                         vector.add(vectorInit);
+
+                        if (vector.length() >= entity.getLocation().distance(location)) continue;
                     }
                 }
             }
