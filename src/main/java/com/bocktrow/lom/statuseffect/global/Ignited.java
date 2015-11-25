@@ -31,7 +31,7 @@ public class Ignited extends StatusEffect {
 
     @Override
     public void effectTick(GamePlayer gamePlayer) {
-        ParticleEffect.FLAME.display(.2F, .2F, .2F, 0, (int) (tick / 40), gamePlayer.getPlayer().getLocation(), 24);
+        ParticleEffect.FLAME.display(.2F, .5F, .2F, 0, (int) (tick / 40), gamePlayer.getPlayer().getLocation().add(0, 1, 0), 24);
         if (--tick % 20 == 0) gamePlayer.getPlayer().damage(20.0);
     }
 }
