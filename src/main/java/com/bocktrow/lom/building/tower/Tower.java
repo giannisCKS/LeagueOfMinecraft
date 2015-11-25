@@ -1,6 +1,7 @@
 package com.bocktrow.lom.building.tower;
 
 import com.bocktrow.lom.building.Building;
+import com.bocktrow.lom.gametick.Tick;
 import com.bocktrow.lom.team.Team;
 import com.bocktrow.lom.utils.ParticleEffect;
 import org.bukkit.Effect;
@@ -33,20 +34,27 @@ public class Tower extends Building {
 
                 Location entLoc = entity.getLocation().add(0, 1, 0);
 
-                if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 10) {
-                    Vector vector = entLoc.toVector().subtract(location.toVector()).multiply(0.05);
+                damage: {
+                    if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 10) {
+                        Vector vector = entLoc.toVector().subtract(location.toVector()).multiply(0.05);
 
-                    if ((getTeam() == Team.BLUE & vector.getX() < 0) || (getTeam() == Team.RED & vector.getX() > 0)) continue;
+                        if ((getTeam() == Team.BLUE & vector.getX() < 0) || (getTeam() == Team.RED & vector.getX() > 0)) break damage;
 
-                    Vector originalVector = vector.clone();
+                        Vector originalVector = vector.clone();
 
-                    for (int i = 0; i <= 20; i++) {
-                        ParticleEffect.SPELL_WITCH.display(.1F, .1F, .1F, 0, 1, location.clone().add(vector), 24);
-                        vector.add(originalVector);
+                        for (int i = 0; i <= 20; i++) {
+                            ParticleEffect.SPELL_WITCH.display(.1F, .1F, .1F, 0, 1, location.clone().add(vector), 24);
+                            vector.add(originalVector);
+                        }
+
+                        if (Tick.getTick() % 2 == 0) if (entity.getHealth() > 2D) {
+                            entity.setHealth(entity.getHealth() - 2D);
+                        } else {
+                            entity.damage(5.0);
+                        }
                     }
-
-                    if (entity.getHealth() > 3D) entity.setHealth(entity.getHealth() - 3D);
                 }
+
 
                 if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 14) {
                     Player player = (Player) entity;

@@ -11,7 +11,11 @@ import org.bukkit.Bukkit;
 
 public class Tick {
 
-    public static int currentTick = 0;
+    private static int currentTick = 0;
+
+    public static int getTick() {
+        return currentTick;
+    }
 
     public static void init() {
         Bukkit.getScheduler().runTaskTimer(LeagueOfMinecraft.INSTANCE, Tick::tick, 1L, 1L);
