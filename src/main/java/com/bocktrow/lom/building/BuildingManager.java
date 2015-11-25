@@ -67,6 +67,8 @@ public class BuildingManager {
                                 }
                                 break;
                         }
+
+                        region.setBlock(new Vector(x, y, z), block);
                     }
                 }
             }
