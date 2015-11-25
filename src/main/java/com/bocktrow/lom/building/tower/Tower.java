@@ -36,11 +36,11 @@ public class Tower extends Building {
                             location.getY() - entity.getEyeLocation().getY() + 1,
                             location.getZ() - entity.getEyeLocation().getZ());
 
-                    vector = vector.multiply(0.05);
+                    vector = vector.normalize().multiply(0.05);
 
                     Vector vectorInit = vector.clone();
 
-                    for (int i = 0; i <= 19; i++) {
+                    for (int i = 0; i <= 30; i++) {
                         ParticleEffect.SPELL_WITCH.display(0F, 0F, 0F, 0, 3, location.subtract(vector), 20);
                         vector.add(vectorInit);
                     }
