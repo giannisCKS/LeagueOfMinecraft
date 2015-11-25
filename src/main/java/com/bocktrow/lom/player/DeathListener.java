@@ -7,7 +7,10 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class DeathListener implements Listener {
 
@@ -24,6 +27,7 @@ public class DeathListener implements Listener {
             event.getEntity().setFlying(true);
             event.getDrops().clear();
             event.setDroppedExp(0);
+            event.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, (int) 1E10, 1));
             ActionBarUtil.sendToPlayer(ChatColor.RED + "" + ChatColor.BOLD + "You have died!", event.getEntity());
             GamePlayer.getGamePlayer(event.getEntity()).die();
         }
@@ -37,6 +41,17 @@ public class DeathListener implements Listener {
             event.getPlayer().teleport(location);
             event.getPlayer().setAllowFlight(true);
             event.getPlayer().setFlying(true);
+        }
+    }
+
+    @EventHandler
+    public void slot(PlayerItemHeldEvent event) {
+        if (GamePlayer.getGamePlayer(event.getPlayer()) != null && GamePlayer.getGamePlayer(event.getPlayer()).isDead() && event.getNewSlot() != 8) {
+            if (event.getPreviousSlot() == 8) {
+                event.setCancelled(true);
+            } else {
+                event.getPlayer().getInventory().setHeldItemSlot(8);
+            }
         }
     }
 
