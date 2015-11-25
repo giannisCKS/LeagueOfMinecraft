@@ -48,7 +48,7 @@ public class Tower extends Building {
             }
         }
     }
-}
+
 
     @Override
     public void onDestroy() {
