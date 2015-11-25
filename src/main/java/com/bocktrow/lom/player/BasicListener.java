@@ -2,6 +2,7 @@ package com.bocktrow.lom.player;
 
 import com.bocktrow.lom.champion.mrepic.MrEpic;
 import com.bocktrow.lom.statuseffect.global.Homeguard;
+import com.bocktrow.lom.statuseffect.global.Ignited;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -25,10 +26,14 @@ public class BasicListener implements Listener {
 
     @EventHandler
     public void move(PlayerMoveEvent event) {
-        if (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN) != null &&
-                event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAPIS_BLOCK ) {
+        if (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN) != null) {
             if (GamePlayer.getGamePlayer(event.getPlayer()) != null) {
-                GamePlayer.getGamePlayer(event.getPlayer()).addStatusEffect(new Homeguard("Lapis Block"));
+                if (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.LAPIS_BLOCK ) {
+                    GamePlayer.getGamePlayer(event.getPlayer()).addStatusEffect(new Homeguard("Lapis Block"));
+                } else if (event.getPlayer().getLocation().getBlock().getRelative(BlockFace.DOWN).getType() == Material.REDSTONE_BLOCK) {
+                    GamePlayer.getGamePlayer(event.getPlayer()).addStatusEffect(new Ignited(event.getPlayer().getName()));
+                }
+
             }
         }
     }

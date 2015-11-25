@@ -29,10 +29,11 @@ public class Desolve extends Ability {
     @Override
     public String[] getDescription(GamePlayer player) {
 
+        double damage = 25 + player.getStatistic(Statistic.ABILITY_POWER);
         String cooldown = player.getStatistic(Statistic.COOLDOWN_REDUCTION) == 0 ? cooldown() + "s" :
                 ((int) (cooldown() - (player.getStatistic(Statistic.COOLDOWN_REDUCTION) * cooldown()))) + "s" + ChatColor.GRAY +  " (Base: " + cooldown() + "s)";
 
-        return new String[]{"Causes an explosion that deals [Y]" + player.getStatistic(Statistic.ABILITY_POWER) + " magic damage [G]to enemy units!", "", ChatColor.GRAY + "Cooldown: " + ChatColor.AQUA + cooldown};
+        return new String[]{"Causes an explosion that deals [Y]" + damage + " magic damage [G]to enemy units!", "", ChatColor.GRAY + "Cooldown: " + ChatColor.AQUA + cooldown};
     }
 
     @Override
@@ -85,8 +86,8 @@ public class Desolve extends Ability {
             if (vector.length() >= 10) return;
         }
 
-
-        location.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location.clone().add(vector)) <= 1.2 && entity != player.getPlayer()).forEach(entity1 -> entity1.damage(player.getStatistic(Statistic.ABILITY_POWER)));
+        double damage = 25 + player.getStatistic(Statistic.ABILITY_POWER);
+        location.getWorld().getLivingEntities().stream().filter(entity -> entity.getLocation().distance(location.clone().add(vector)) <= 1.2 && entity != player.getPlayer()).forEach(entity1 -> entity1.damage(damage));
 
         for (double i = 0; i<=2 * Math.PI; i += Math.PI / 8) {
             for (double j = 0; j<= Math.PI; j += Math.PI / 8) {
