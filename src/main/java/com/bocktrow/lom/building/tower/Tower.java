@@ -50,7 +50,7 @@ public class Tower extends Building {
                         if (loc.distance(entity.getLocation()) > dist) continue;
 
                         ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, loc, 20);
-                        vector.add(vectorInit);
+                        vector.add(vectorInit).multiply(0.5);
                     }
                 }
             }
