@@ -15,6 +15,7 @@ import com.sk89q.worldedit.schematic.SchematicFormat;
 import org.apache.commons.lang.SystemUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
@@ -130,10 +131,23 @@ public class BuildingManager {
 
             region.paste(session, new Vector(vector.getX(), vector.getY(), vector.getZ()), false);
 
+            ArrayList<Block> blocks = new ArrayList<>();
+            ArrayList<Block> blocks2 = new ArrayList<>();
 
-            ArrayList<Block> blocks = getBlocks(region, new Vector(vector.getX(), vector.getY(), vector.getZ()).add(region.getOffset()), world.getWorld());
-            Block block = location.getBlock().getRelative(team == Team.BLUE ? 1 : -1 , 4, 0);
-            ArrayList<Block> blocks2 = new ArrayList<>(); blocks2.add(block);
+            for (int x = -1; x <= 1; x++) {
+                for (int y = 1; y <= 5; y++) {
+                    for (int z = -1; z <= 1; z++) {
+                        Block block = location.clone().add(x, y, z).getBlock();
+                        if (block != null && block.getType() != Material.AIR) {
+                            blocks.add(block);
+                            if (block.getType() == Material.SEA_LANTERN) {
+                                blocks2.add(block);
+                            }
+                        }
+                    }
+                }
+            }
+
             Tower tower = new Tower(team, location.getBlock(), blocks, blocks2, true);
 
             buildings.add(tower);
@@ -142,24 +156,6 @@ public class BuildingManager {
             e.printStackTrace();
         }
 
-    }
-
-    private static ArrayList<Block> getBlocks(CuboidClipboard region, Vector vector, World world) {
-        ArrayList<Block> blocks = new ArrayList<>();
-        for (int y = 0; y < region.getHeight() + 1; ++y) {
-            for (int x = 0; x < region.getWidth(); ++x) {
-                for (int z = 0; z < region.getLength(); ++z) {
-                    try {
-                        final BaseBlock block = region.getBlock(new Vector(x, y, z));
-                        if (block != null && !block.isAir()) {
-                            world.getBlockAt(vector.getBlockX() + x, vector.getBlockY() + y, vector.getBlockZ() + z);
-                        }
-
-                    } catch (ArrayIndexOutOfBoundsException ignored) {}
-                }
-            }
-        }
-        return null;
     }
 
 }
