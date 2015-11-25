@@ -38,7 +38,7 @@ public class ScoreboardVisualizer {
             objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Score:").setScore(--slot);
             objective.getScore(ChatColor.YELLOW + "" + gamePlayer.getKills() + "/" + gamePlayer.getDeaths() + "/" + gamePlayer.getAssists()).setScore(--slot);
             objective.getScore(ChatColor.GREEN + "").setScore(--slot);
-            objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold:").setScore(--slot);
+            objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Gold earned:").setScore(--slot);
             objective.getScore(ChatColor.YELLOW + "⛃ " + gamePlayer.getGold()).setScore(--slot);
 
             if (gamePlayer.getStatusEffects().size() != 0) {
