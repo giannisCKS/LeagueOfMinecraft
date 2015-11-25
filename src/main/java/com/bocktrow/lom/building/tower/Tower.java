@@ -19,9 +19,7 @@ public class Tower extends Building {
 
     @Override
     public void tick() {
-        for (Block block : getBlocks()) {
-            block.setType(Material.WOOD);
-        }
+
     }
 
     @Override
