@@ -28,6 +28,7 @@ public class DeathListener implements Listener {
             event.getDrops().clear();
             event.setDroppedExp(0);
             event.getEntity().addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, (int) 1E10, 1));
+            event.getEntity().getInventory().setHeldItemSlot(7);
             ActionBarUtil.sendToPlayer(ChatColor.RED + "" + ChatColor.BOLD + "You have died!", event.getEntity());
             GamePlayer.getGamePlayer(event.getEntity()).die();
         }
@@ -46,11 +47,11 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void slot(PlayerItemHeldEvent event) {
-        if (GamePlayer.getGamePlayer(event.getPlayer()) != null && GamePlayer.getGamePlayer(event.getPlayer()).isDead() && event.getNewSlot() != 8) {
-            if (event.getPreviousSlot() == 8) {
+        if (GamePlayer.getGamePlayer(event.getPlayer()) != null && GamePlayer.getGamePlayer(event.getPlayer()).isDead() && event.getNewSlot() != 7) {
+            if (event.getPreviousSlot() == 7) {
                 event.setCancelled(true);
             } else {
-                event.getPlayer().getInventory().setHeldItemSlot(8);
+                event.getPlayer().getInventory().setHeldItemSlot(7);
             }
         }
     }
