@@ -1,0 +1,51 @@
+package com.bocktrow.lom.building;
+
+import com.bocktrow.lom.LeagueOfMinecraft;
+import com.sk89q.worldedit.CuboidClipboard;
+import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
+import com.sk89q.worldedit.Vector;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
+import com.sk89q.worldedit.data.DataException;
+import com.sk89q.worldedit.schematic.MCEditSchematicFormat;
+import com.sk89q.worldedit.schematic.SchematicFormat;
+import org.apache.commons.lang.SystemUtils;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+
+import java.io.File;
+import java.io.IOException;
+
+@SuppressWarnings("deprecation")
+public class BuildingManager {
+
+    private static String escapeCharacterForFiles = "\\";
+
+    public static void init() {
+        buildNexus(new Location(Bukkit.getWorld("world"), 100, 4, 0));
+        buildNexus(new Location(Bukkit.getWorld("world"), -100, 4, 0));
+    }
+
+    public static void buildNexus(Location location) {
+        if (SystemUtils.IS_OS_UNIX) escapeCharacterForFiles = "/";
+        File file = new File(LeagueOfMinecraft.INSTANCE.getDataFolder() + escapeCharacterForFiles + "schematics" + escapeCharacterForFiles + "nexus" + ".schematic");
+        if (!file.exists()) {
+            throw new RuntimeException("File '" + file.getName() + "' does not exist, while it should.");
+        }
+
+        try {
+            MCEditSchematicFormat schematicFormat = (MCEditSchematicFormat) SchematicFormat.getFormat(file);
+            CuboidClipboard region = schematicFormat.load(file);
+            BukkitWorld world = new BukkitWorld(Bukkit.getWorld("world"));
+            EditSession session = new EditSession(world, 1000000);
+
+            org.bukkit.util.Vector vector = location.toVector();
+            region.paste(session, new Vector(vector.getX(), vector.getY(), vector.getZ()), false);
+
+        } catch (IOException | DataException | MaxChangedBlocksException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+}

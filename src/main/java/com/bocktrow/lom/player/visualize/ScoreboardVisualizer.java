@@ -33,18 +33,6 @@ public class ScoreboardVisualizer {
 
             objective.getScore(ChatColor.YELLOW + "").setScore(10);
 
-            if (player.getInventory().getHeldItemSlot() == 7) {
-
-                objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Statistics:").setScore(9);
-                objective.getScore(ChatColor.YELLOW + "Attack damage: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ATTACK_DAMAGE)).setScore(8);
-                objective.getScore(ChatColor.YELLOW + "Ability power: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ABILITY_POWER)).setScore(7);
-                objective.getScore(ChatColor.YELLOW + "Cr. strike ch.: " + ChatColor.AQUA + (gamePlayer.getStatistic(Statistic.CRITICAL_DAMAGE) * 100) + "%").setScore(6);
-                objective.getScore(ChatColor.YELLOW + "Life steal: " + ChatColor.AQUA + (gamePlayer.getStatistic(Statistic.LIFE_STEAL)* 100) + "%").setScore(5);
-                objective.getScore(ChatColor.YELLOW + "Max. health: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.HEALTH)).setScore(4);
-                objective.getScore(ChatColor.YELLOW + "Armor: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.ARMOR)).setScore(3);
-                objective.getScore(ChatColor.YELLOW + "Magic Resist.: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MAGIC_RESISTANCE)).setScore(2);
-                objective.getScore(ChatColor.YELLOW + "Movement speed: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED)).setScore(1);
-            } else {
                 objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Active effects:").setScore(9);
                 Iterator<StatusEffect> statusEffectIterator = gamePlayer.getStatusEffects().iterator();
                 int score = 8;
@@ -53,7 +41,6 @@ public class ScoreboardVisualizer {
                     objective.getScore((statusEffect.isPositive() ? ChatColor.GREEN : ChatColor.RED) +
                             statusEffect.getName() + ChatColor.GRAY + " (" + (statusEffect.getDuration() / 20) + "s)").setScore(score--);
                 }
-            }
 
             objective.getScore(ChatColor.RED + "").setScore(0);
 
