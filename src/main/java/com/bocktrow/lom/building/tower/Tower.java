@@ -38,16 +38,21 @@ public class Tower extends Building {
                     Vector originalVector = vector.clone();
 
                     for (int i = 0; i <= 20; i++) {
-                        ParticleEffect.SPELL_MOB_AMBIENT.display(.1F, .1F, .1F, 0, 5, location.clone().add(vector), 24);
+                        ParticleEffect.SPELL_WITCH.display(.1F, .1F, .1F, 0, 1, location.clone().add(vector), 24);
                         vector.add(originalVector);
                     }
+
+                    if (entity.getHealth() > 5D) entity.setHealth(entity.getHealth() - 5D);
                 }
 
                 if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 14) {
                     Player player = (Player) entity;
 
-                    for (double i = 0; i<=Math.PI; i += Math.PI / 32) {
+                    for (double i = getTeam() == Team.RED ? 0 : Math.PI; i<= (getTeam() == Team.RED ? 1 : 2) *  Math.PI; i += Math.PI / 32) {
                         ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, getCenter().getLocation().add(0.5, 1, 0.5).clone().add(10 * Math.sin(i), 0, 10 * Math.cos(i)), player);
+                    }
+                    for (int i = -10; i <= 10; i ++) {
+                        ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, getCenter().getLocation().add(0.5, 1, 0.5 + i).clone(), player);
                     }
                 }
             }
