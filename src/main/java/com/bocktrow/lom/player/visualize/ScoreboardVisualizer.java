@@ -43,12 +43,13 @@ public class ScoreboardVisualizer {
 
             if (gamePlayer.getStatusEffects().size() != 0) {
                 objective.getScore(ChatColor.YELLOW + "").setScore(--slot);
-                objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Active effects:").setScore(9);
+                objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Active effects:").setScore(--slot);
             }
             for (StatusEffect statusEffect : gamePlayer.getStatusEffects()) {
                 objective.getScore((statusEffect.isPositive() ? ChatColor.GREEN : ChatColor.RED) +
                         statusEffect.getName() + ChatColor.GRAY + " (" + (statusEffect.getDuration() / 20) + "s)").setScore(--slot);
             }
+            objective.getScore(ChatColor.AQUA + "").setScore(--slot);
 
             objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         });
