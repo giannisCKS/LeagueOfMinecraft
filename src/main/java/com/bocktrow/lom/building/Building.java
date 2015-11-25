@@ -1,9 +1,11 @@
 package com.bocktrow.lom.building;
 
 import com.bocktrow.lom.team.Team;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,11 @@ public abstract class Building {
         this.health = health;
 
         maxhealth = health;
+
+        armorStand = (ArmorStand) top.getWorld().spawnEntity(top.getLocation().add(0.5, 0, 0.5), EntityType.ARMOR_STAND);
+        armorStand.setGravity(false);
+        armorStand.setVisible(false);
+        armorStand.setCustomNameVisible(true);
     }
 
     public ArrayList<Block> getBlocks() {
@@ -80,4 +87,27 @@ public abstract class Building {
     public abstract boolean isDestroyable();
 
 
+    public void atick() {
+        tick();
+
+        String hbar = ChatColor.GREEN + "";
+        int boxes = 10;
+        int gboxes = (int) ((health / maxhealth) * 10);
+
+        while (gboxes > 0) {
+            boxes--;
+            gboxes--;
+            hbar += "█";
+        }
+
+        hbar += ChatColor.GRAY + "";
+
+        while (boxes > 0) {
+            boxes--;
+            hbar += "█";
+        }
+
+
+        armorStand.setCustomName(ChatColor.YELLOW + "" + ChatColor.BOLD + "" + ((int) health) + " " + ChatColor.RESET + hbar + " " + ChatColor.YELLOW + ((int) maxhealth));
+    }
 }

@@ -42,7 +42,7 @@ public class BuildingManager {
         buildTower(new Location(Bukkit.getWorld("world"), 41, 3, -4), Team.RED);
 
         Bukkit.getScheduler().runTaskTimer(LeagueOfMinecraft.INSTANCE, () -> {
-            buildings.stream().forEach(Building::tick);
+            buildings.stream().forEach(Building::atick);
         }, 1L, 1L);
     }
 
