@@ -30,17 +30,19 @@ public class Tower extends Building {
 
         for (LivingEntity entity : getCenter().getWorld().getLivingEntities()) {
             if ((entity instanceof Player)) {
-                if (entity.getLocation().distance(location) <= 7) {
+                if (entity.getLocation().distance(location) <= 10) {
 
                     Vector vector = new Vector(location.getX() - entity.getEyeLocation().getX(),
                             location.getY() - entity.getEyeLocation().getY() + 1,
                             location.getZ() - entity.getEyeLocation().getZ());
 
-                    vector = vector.normalize().multiply(0.05);
+                    vector = vector.normalize().multiply(0.02);
 
                     Vector vectorInit = vector.clone();
 
-                    for (int i = 0; i <= 30; i++) {
+                    entity.damage(0.5);
+
+                    for (int i = 0; i <= 50; i++) {
                         ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, location.subtract(vector), 20);
                         vector.add(vectorInit);
                         if (vector.length() >= entity.getLocation().distance(location)) break;
