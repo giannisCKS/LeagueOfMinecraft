@@ -28,7 +28,7 @@ public class Tower extends Building {
         Block block = getFunctionalBlcoks().get(0);
         Location location = block.getLocation().add(0.5, 0.5, 0.5);
         block.getWorld().getLivingEntities().stream().filter(entity -> location.distance(entity.getLocation()) <= 8 && entity instanceof Player).forEach(entity -> {
-            Vector vector = location.toVector().add(entity.getEyeLocation().getDirection());
+            Vector vector = location.toVector().add(entity.getEyeLocation().toVector());
 
             Vector cut = vector.normalize().multiply(0.1);
             Vector work = cut.clone();
