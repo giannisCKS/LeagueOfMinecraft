@@ -30,27 +30,20 @@ public class Tower extends Building {
 
         for (LivingEntity entity : getCenter().getWorld().getLivingEntities()) {
             if ((entity instanceof Player)) {
-                if (entity.getLocation().distance(location) <= 10) {
 
-                    Vector vector = new Vector(location.getX() - entity.getEyeLocation().getX(),
-                            location.getY() - entity.getEyeLocation().getY() + 1,
-                            location.getZ() - entity.getEyeLocation().getZ());
+                Location entLoc = entity.getLocation().add(0, 1, 0);
 
-                    vector = vector.normalize().multiply(0.2);
+                if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 10) {
+                    Vector vector = entLoc.toVector().subtract(location.toVector());
 
-                    Vector vectorInit = vector.clone();
+                    ParticleEffect.CRIT_MAGIC.display(.2F, .2F, .2F, 0, 10, location.clone().add(vector), 24);
+                }
 
-                    entity.damage(8);
+                if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 14) {
+                    Player player = (Player) entity;
 
-                    double dist = entity.getLocation().distance(location) / 2;
-
-                    for (int i = 0; i <= 50; i++) {
-                        Location loc = location.subtract(vector.clone().multiply(0.5));
-
-                        if (loc.distance(entity.getLocation()) > dist) continue;
-
-                        ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, loc, 20);
-                        vector.add(vectorInit);
+                    for (double i = 0; i<=2 * Math.PI; i += Math.PI / 16) {
+                        ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, getCenter().getLocation().add(0.5, 1, 0.5).clone().add(10 * Math.sin(i), 0, 10 * Math.cos(i)), player);
                     }
                 }
             }
