@@ -3,6 +3,7 @@ package com.bocktrow.lom.building.tower;
 import com.bocktrow.lom.building.Building;
 import com.bocktrow.lom.team.Team;
 import org.bukkit.Effect;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Tower extends Building {
     @Override
     public void tick() {
         for (Block block : getBlocks()) {
-            block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getType());
+            block.setType(Material.WOOD);
         }
     }
 
