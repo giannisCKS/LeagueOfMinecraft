@@ -26,6 +26,9 @@ public class BuildingManager {
     public static void init() {
         buildNexus(new Location(Bukkit.getWorld("world"), 50, 3, 0), Team.RED);
         buildNexus(new Location(Bukkit.getWorld("world"), -50, 3, 0), Team.BLUE);
+
+        buildTower(new Location(Bukkit.getWorld("world"), -41, 3, 4), Team.BLUE);
+        buildTower(new Location(Bukkit.getWorld("world"), -41, 3, -4), Team.BLUE);
     }
 
     public static void buildNexus(Location location, Team team) {
@@ -41,39 +44,71 @@ public class BuildingManager {
             BukkitWorld world = new BukkitWorld(Bukkit.getWorld("world"));
             EditSession session = new EditSession(world, 1000000);
 
-            for (int y = 0; y < region.getHeight() + 1; ++y) {
-                for (int x = 0; x < region.getWidth(); ++x) {
-                    for (int z = 0; z < region.getLength(); ++z) {
-                        try {
-                            final BaseBlock block = region.getBlock(new Vector(x, y, z));
+            color(region, team);
 
-                            if (block == null) {
-                                continue;
-                            }
+            org.bukkit.util.Vector vector = location.toVector();
+            region.paste(session, new Vector(vector.getX(), vector.getY(), vector.getZ()), false);
 
-                            switch (block.getType()) {
-                                case (19):
-                                    block.setType(35);
-                                    break;
-                                case (35):
-                                case (95):
-                                case (171):
-                                    switch (team) {
-                                        case BLUE:
-                                            block.setData(11);
-                                            break;
-                                        case RED:
-                                            block.setData(14);
-                                            break;
-                                    }
-                                    break;
-                                default: continue;
-                            }
-                            region.setBlock(new Vector(x, y, z), block);
+        } catch (IOException | DataException | MaxChangedBlocksException e) {
+            e.printStackTrace();
+        }
 
-                        } catch (ArrayIndexOutOfBoundsException ignored) {}
-                    }
+    }
+
+    private static void color(CuboidClipboard region, Team team) {
+        for (int y = 0; y < region.getHeight() + 1; ++y) {
+            for (int x = 0; x < region.getWidth(); ++x) {
+                for (int z = 0; z < region.getLength(); ++z) {
+                    try {
+                        final BaseBlock block = region.getBlock(new Vector(x, y, z));
+
+                        if (block == null) {
+                            continue;
+                        }
+
+                        switch (block.getType()) {
+                            case (19):
+                                block.setType(35);
+                                break;
+                            case (35):
+                            case (95):
+                            case (171):
+                                switch (team) {
+                                    case BLUE:
+                                        block.setData(11);
+                                        break;
+                                    case RED:
+                                        block.setData(14);
+                                        break;
+                                }
+                                break;
+                            default: continue;
+                        }
+                        region.setBlock(new Vector(x, y, z), block);
+
+                    } catch (ArrayIndexOutOfBoundsException ignored) {}
                 }
+            }
+        }
+    }
+
+    public static void buildTower(Location location, Team team) {
+        if (SystemUtils.IS_OS_UNIX) escapeCharacterForFiles = "/";
+        File file = new File(LeagueOfMinecraft.INSTANCE.getDataFolder() + escapeCharacterForFiles + "schematics" + escapeCharacterForFiles + "nexus" + ".schematic");
+        if (!file.exists()) {
+            throw new RuntimeException("File '" + file.getName() + "' does not exist, while it should.");
+        }
+
+        try {
+            MCEditSchematicFormat schematicFormat = (MCEditSchematicFormat) SchematicFormat.getFormat(file);
+            CuboidClipboard region = schematicFormat.load(file);
+            BukkitWorld world = new BukkitWorld(Bukkit.getWorld("world"));
+            EditSession session = new EditSession(world, 1000000);
+
+            color(region, team);
+
+            if (team == Team.RED) {
+                region.rotate2D(180);
             }
 
             org.bukkit.util.Vector vector = location.toVector();
