@@ -40,7 +40,7 @@ public class Tower extends Building {
 
                     Vector vectorInit = vector.clone();
 
-                    entity.damage(2);
+                    entity.damage(10);
 
                     for (int i = 0; i <= 50; i++) {
                         ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, location.subtract(vector), 20);
