@@ -4,6 +4,7 @@ import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.statuseffect.SEffect;
 import com.bocktrow.lom.statuseffect.StatusEffect;
+import com.bocktrow.lom.utils.ParticleEffect;
 
 public class Ignited extends StatusEffect {
 
@@ -30,6 +31,7 @@ public class Ignited extends StatusEffect {
 
     @Override
     public void effectTick(GamePlayer gamePlayer) {
+        ParticleEffect.FLAME.display(.2F, .2F, .2F, 0, (int) (tick / 40), gamePlayer.getPlayer().getLocation(), 24);
         if (--tick % 20 == 0) gamePlayer.getPlayer().damage(20.0);
     }
 }

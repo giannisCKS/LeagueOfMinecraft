@@ -4,6 +4,7 @@ import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.statuseffect.SEffect;
 import com.bocktrow.lom.statuseffect.StatusEffect;
+import com.bocktrow.lom.utils.ParticleEffect;
 
 public class Homeguard extends StatusEffect {
 
@@ -33,5 +34,6 @@ public class Homeguard extends StatusEffect {
     public void effectTick(GamePlayer gamePlayer) {
         mvmsp-= 0.5;
         getBonusStats().put(Statistic.MOVEMENT_SPEED, mvmsp);
+        ParticleEffect.CRIT_MAGIC.display(.2F, .2F, .2F, 0, (int) (mvmsp / 10), gamePlayer.getPlayer().getLocation(), 24);
     }
 }

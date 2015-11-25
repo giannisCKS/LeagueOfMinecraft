@@ -34,15 +34,19 @@ public class Tower extends Building {
                 Location entLoc = entity.getLocation().add(0, 1, 0);
 
                 if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 10) {
-                    Vector vector = entLoc.toVector().subtract(location.toVector());
+                    Vector vector = entLoc.toVector().subtract(location.toVector()).multiply(0.05);
+                    Vector originalVector = vector.clone();
 
-                    ParticleEffect.CRIT_MAGIC.display(.2F, .2F, .2F, 0, 10, location.clone().add(vector), 24);
+                    for (int i = 0; i <= 20; i++) {
+                        ParticleEffect.SPELL_MOB_AMBIENT.display(.1F, .1F, .1F, 0, 5, location.clone().add(vector), 24);
+                        vector.add(originalVector);
+                    }
                 }
 
                 if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 14) {
                     Player player = (Player) entity;
 
-                    for (double i = 0; i<=2 * Math.PI; i += Math.PI / 16) {
+                    for (double i = 0; i<=Math.PI; i += Math.PI / 32) {
                         ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, getCenter().getLocation().add(0.5, 1, 0.5).clone().add(10 * Math.sin(i), 0, 10 * Math.cos(i)), player);
                     }
                 }
