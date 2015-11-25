@@ -35,6 +35,9 @@ public class Tower extends Building {
 
                 if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 10) {
                     Vector vector = entLoc.toVector().subtract(location.toVector()).multiply(0.05);
+
+                    if ((getTeam() == Team.BLUE & vector.getX() < 0) || (getTeam() == Team.RED & vector.getX() > 0)) continue;
+
                     Vector originalVector = vector.clone();
 
                     for (int i = 0; i <= 20; i++) {
@@ -42,13 +45,13 @@ public class Tower extends Building {
                         vector.add(originalVector);
                     }
 
-                    if (entity.getHealth() > 5D) entity.setHealth(entity.getHealth() - 5D);
+                    if (entity.getHealth() > 3D) entity.setHealth(entity.getHealth() - 3D);
                 }
 
                 if (entity.getLocation().distance(getCenter().getLocation().add(0.5, 1, 0.5)) <= 14) {
                     Player player = (Player) entity;
 
-                    for (double i = getTeam() == Team.RED ? 0 : Math.PI; i<= (getTeam() == Team.RED ? 1 : 2) *  Math.PI; i += Math.PI / 32) {
+                    for (double i = getTeam() == Team.BLUE ? 0 : Math.PI; i<= (getTeam() == Team.BLUE ? 1 : 2) *  Math.PI; i += Math.PI / 32) {
                         ParticleEffect.REDSTONE.display(0F, 0F, 0F, 0, 1, getCenter().getLocation().add(0.5, 1, 0.5).clone().add(10 * Math.sin(i), 0, 10 * Math.cos(i)), player);
                     }
                     for (int i = -10; i <= 10; i ++) {
