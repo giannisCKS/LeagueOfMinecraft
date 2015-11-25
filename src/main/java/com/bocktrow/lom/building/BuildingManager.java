@@ -29,6 +29,9 @@ public class BuildingManager {
 
         buildTower(new Location(Bukkit.getWorld("world"), -41, 3, 4), Team.BLUE);
         buildTower(new Location(Bukkit.getWorld("world"), -41, 3, -4), Team.BLUE);
+
+        buildTower(new Location(Bukkit.getWorld("world"), 41, 3, 4), Team.RED);
+        buildTower(new Location(Bukkit.getWorld("world"), 41, 3, -4), Team.RED);
     }
 
     public static void buildNexus(Location location, Team team) {
