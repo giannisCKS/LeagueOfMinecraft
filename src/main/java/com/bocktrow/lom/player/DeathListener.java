@@ -22,6 +22,8 @@ public class DeathListener implements Listener {
             event.getEntity().teleport(location);
             event.getEntity().setAllowFlight(true);
             event.getEntity().setFlying(true);
+            event.getDrops().clear();
+            event.setDroppedExp(0);
             ActionBarUtil.sendToPlayer(ChatColor.RED + "" + ChatColor.BOLD + "You have died!", event.getEntity());
             GamePlayer.getGamePlayer(event.getEntity()).die();
         }
@@ -29,7 +31,7 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void move(PlayerMoveEvent event) {
-        if (GamePlayer.getGamePlayer(event.getPlayer()) != null && GamePlayer.getGamePlayer(event.getPlayer()).isDead() && event.getTo().getX() <= 10) {
+        if (GamePlayer.getGamePlayer(event.getPlayer()) != null && GamePlayer.getGamePlayer(event.getPlayer()).isDead() && event.getTo().getY() <= 10) {
             Location location = event.getPlayer().getLocation();
             location.setY(12);
             event.getPlayer().teleport(location);
