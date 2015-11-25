@@ -3,12 +3,15 @@ package com.bocktrow.lom.player.visualize;
 import com.bocktrow.lom.LeagueOfMinecraft;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
+import com.bocktrow.lom.statuseffect.StatusEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
+
+import java.util.Iterator;
 
 public class ScoreboardVisualizer {
 
@@ -42,7 +45,14 @@ public class ScoreboardVisualizer {
                 objective.getScore(ChatColor.YELLOW + "Magic Resist.: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MAGIC_RESISTANCE)).setScore(2);
                 objective.getScore(ChatColor.YELLOW + "Movement speed: " + ChatColor.AQUA + gamePlayer.getStatistic(Statistic.MOVEMENT_SPEED)).setScore(1);
             } else {
-                objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Details:").setScore(9);
+                objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Active effects:").setScore(9);
+                Iterator<StatusEffect> statusEffectIterator = gamePlayer.getStatusEffects().iterator();
+                int score = 8;
+                while (statusEffectIterator.hasNext() && score > 0) {
+                    StatusEffect statusEffect = statusEffectIterator.next();
+                    objective.getScore((statusEffect.isPositive() ? ChatColor.GREEN : ChatColor.RED) +
+                            statusEffect.getName() + ChatColor.GRAY + " (" + (statusEffect.getDuration() / 20) + "s)").setScore(score--);
+                }
             }
 
             objective.getScore(ChatColor.RED + "").setScore(0);
