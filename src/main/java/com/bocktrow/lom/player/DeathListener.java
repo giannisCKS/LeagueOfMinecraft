@@ -11,10 +11,13 @@ public class DeathListener implements Listener {
 
     @EventHandler
     public void death(PlayerDeathEvent event) {
+        if (GamePlayer.getGamePlayer(event.getEntity()) != null)
         event.setDeathMessage("");
         event.getEntity().setHealth(event.getEntity().getMaxHealth());
         event.getEntity().setGameMode(GameMode.SPECTATOR);
         ActionBarUtil.sendToPlayer(ChatColor.RED + "" + ChatColor.BOLD + "You have died!", event.getEntity());
+        GamePlayer.getGamePlayer(event.getEntity()).die();
+
     }
 
 }

@@ -65,10 +65,10 @@ public class Tower extends Building {
                             vector.add(originalVector);
                         }
 
-                        if (Tick.getTick() % 2 == 0) if (entity.getHealth() > 4D) {
-                            entity.damage(4D);
+                        if (Tick.getTick() % 2 == 0) if (entity.getHealth() > 6D) {
+                            entity.damage(6D);
                         } else {
-                            entity.damage(5.0);
+                            entity.damage(10.0);
                         }
                     }
                 }

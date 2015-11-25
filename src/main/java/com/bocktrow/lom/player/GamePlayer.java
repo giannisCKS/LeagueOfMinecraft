@@ -168,7 +168,8 @@ public class GamePlayer {
         statusEffects.add(statusEffect);
     }
 
-    public void onDeath() {
-
+    public void die() {
+        dead = true;
+        statusEffects.clear();
     }
 }

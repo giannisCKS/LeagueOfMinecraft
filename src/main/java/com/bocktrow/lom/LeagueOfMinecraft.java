@@ -4,6 +4,7 @@ import com.bocktrow.lom.ability.AbilityCaster;
 import com.bocktrow.lom.building.BuildingManager;
 import com.bocktrow.lom.gametick.Tick;
 import com.bocktrow.lom.player.BasicListener;
+import com.bocktrow.lom.player.DeathListener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -19,6 +20,7 @@ public class LeagueOfMinecraft extends JavaPlugin {
         getLogger().info("Worked! :D");
         getServer().getPluginManager().registerEvents(new BasicListener(), this);
         getServer().getPluginManager().registerEvents(new AbilityCaster(), this);
+        getServer().getPluginManager().registerEvents(new DeathListener(), this);
 
         BuildingManager.init();
         Tick.init();
