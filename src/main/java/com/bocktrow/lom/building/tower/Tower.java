@@ -36,14 +36,18 @@ public class Tower extends Building {
                             location.getY() - entity.getEyeLocation().getY() + 1,
                             location.getZ() - entity.getEyeLocation().getZ());
 
-                    vector = vector.normalize().multiply(0.02);
+                    vector = vector.normalize().multiply(0.2);
 
                     Vector vectorInit = vector.clone();
 
                     entity.damage(8);
 
-                    for (int i = 0; i <= (int) (entity.getLocation().distance(location) / 0.02); i++) {
+                    double dist = entity.getLocation().distance(location);
+
+                    for (int i = 0; i <= 50; i++) {
                         Location loc = location.subtract(vector);
+
+                        if (loc.distance(entity.getLocation()) > dist) continue;
 
                         ParticleEffect.FLAME.display(0F, 0F, 0F, 0, 3, loc, 20);
                         vector.add(vectorInit);
