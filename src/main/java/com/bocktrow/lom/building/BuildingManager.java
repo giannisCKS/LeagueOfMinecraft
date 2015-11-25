@@ -94,7 +94,7 @@ public class BuildingManager {
 
     public static void buildTower(Location location, Team team) {
         if (SystemUtils.IS_OS_UNIX) escapeCharacterForFiles = "/";
-        File file = new File(LeagueOfMinecraft.INSTANCE.getDataFolder() + escapeCharacterForFiles + "schematics" + escapeCharacterForFiles + "nexus" + ".schematic");
+        File file = new File(LeagueOfMinecraft.INSTANCE.getDataFolder() + escapeCharacterForFiles + "schematics" + escapeCharacterForFiles + "tower" + ".schematic");
         if (!file.exists()) {
             throw new RuntimeException("File '" + file.getName() + "' does not exist, while it should.");
         }
