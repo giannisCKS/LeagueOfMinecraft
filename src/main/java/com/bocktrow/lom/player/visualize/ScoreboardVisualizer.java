@@ -1,6 +1,7 @@
 package com.bocktrow.lom.player.visualize;
 
 import com.bocktrow.lom.LeagueOfMinecraft;
+import com.bocktrow.lom.gametick.Tick;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.statuseffect.StatusEffect;
@@ -23,6 +24,12 @@ public class ScoreboardVisualizer {
         Player player = gamePlayer.getPlayer();
         Scoreboard scoreboard = player.getScoreboard();
 
+        int seconds = Tick.getTick() % 20;
+        String mins = seconds / 60 + ""; if (mins.length() == 1) mins = "0" + mins;
+        String secs = seconds % 60 + ""; if (secs.length() == 1) secs = "0" + secs;
+
+        final String finalMins = mins;
+        final String finalSecs = secs;
         Bukkit.getScheduler().runTaskAsynchronously(LeagueOfMinecraft.INSTANCE, () -> {
             if (scoreboard.getObjective(DisplaySlot.SIDEBAR) != null) {
                 scoreboard.getObjective(DisplaySlot.SIDEBAR).unregister();
@@ -31,9 +38,11 @@ public class ScoreboardVisualizer {
             Objective objective = scoreboard.registerNewObjective("gameSidebar", "dummy");
             int slot = 20;
 
-
             objective.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
 
+            objective.getScore(ChatColor.AQUA + "").setScore(--slot);
+            objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Time elapsed:").setScore(--slot);
+            objective.getScore(ChatColor.YELLOW + "" + finalMins + ":" + finalSecs).setScore(--slot);
             objective.getScore(ChatColor.RED + "").setScore(--slot);
             objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Score:").setScore(--slot);
             objective.getScore(ChatColor.YELLOW + "" + gamePlayer.getKills() + "/" + gamePlayer.getDeaths() + "/" + gamePlayer.getAssists()).setScore(--slot);

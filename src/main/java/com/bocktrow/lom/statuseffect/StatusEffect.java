@@ -2,6 +2,7 @@ package com.bocktrow.lom.statuseffect;
 
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.statistic.Statistic;
+import org.bukkit.entity.LivingEntity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,14 +22,14 @@ public abstract class StatusEffect {
         this.source = source;
     }
 
-    public void tick(GamePlayer gamePlayer) {
+    public void tick(LivingEntity entity) {
         if (duration > 0) {
             duration--;
-            effectTick(gamePlayer);
+            effectTick(entity);
         }
     }
 
-    public abstract void effectTick(GamePlayer gamePlayer);
+    public abstract void effectTick(LivingEntity entity);
 
     public void setDuration(int duration) {
         this.duration = duration;

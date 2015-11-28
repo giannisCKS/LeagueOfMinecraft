@@ -5,6 +5,7 @@ import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.statuseffect.SEffect;
 import com.bocktrow.lom.statuseffect.StatusEffect;
 import com.bocktrow.lom.utils.ParticleEffect;
+import org.bukkit.entity.LivingEntity;
 
 public class Homeguard extends StatusEffect {
 
@@ -31,9 +32,9 @@ public class Homeguard extends StatusEffect {
     }
 
     @Override
-    public void effectTick(GamePlayer gamePlayer) {
+    public void effectTick(LivingEntity entity) {
         mvmsp-= 0.5;
         getBonusStats().put(Statistic.MOVEMENT_SPEED, mvmsp);
-        ParticleEffect.CRIT_MAGIC.display(.2F, .5F, .2F, 0, (int) (mvmsp / 10) + 1, gamePlayer.getPlayer().getLocation().add(0, 1, 0), 24);
+        ParticleEffect.CRIT_MAGIC.display(.2F, .5F, .2F, 0, (int) (mvmsp / 10) + 1, entity.getLocation().add(0, 1, 0), 24);
     }
 }

@@ -6,6 +6,7 @@ import com.bocktrow.lom.player.PlayerEntity;
 import com.bocktrow.lom.player.GamePlayer;
 import com.bocktrow.lom.player.visualize.AbilityVisualizer;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
+import com.bocktrow.lom.player.visualize.TeamVisualizer;
 import com.bocktrow.lom.player.visualize.TextHandler;
 import org.bukkit.Bukkit;
 
@@ -39,6 +40,10 @@ public class Tick {
             PlayerEntity.tickPlayer(gamePlayer);
             PlayerEntity.updatePlayer(gamePlayer);
         });
+
+        if (currentTick % 10 == 0) {
+            TeamVisualizer.updateScoreboards();
+        }
 
         currentTick++;
     }

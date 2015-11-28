@@ -5,9 +5,11 @@ import com.bocktrow.lom.ability.global.Flash;
 import com.bocktrow.lom.champion.Champion;
 import com.bocktrow.lom.item.Item;
 import com.bocktrow.lom.player.visualize.ScoreboardVisualizer;
+import com.bocktrow.lom.player.visualize.TeamVisualizer;
 import com.bocktrow.lom.statistic.Statistic;
 import com.bocktrow.lom.statuseffect.StatusEffect;
 import com.bocktrow.lom.statuseffect.global.Homeguard;
+import com.bocktrow.lom.team.Team;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -18,8 +20,8 @@ public class GamePlayer {
 
     private static HashMap<Player, GamePlayer> gamePlayers = new HashMap<>();
 
-    public static void createGamePlayer(Player player, Champion champion) {
-        gamePlayers.put(player, new GamePlayer(champion, player));
+    public static void createGamePlayer(Player player, Champion champion, Team team) {
+        gamePlayers.put(player, new GamePlayer(champion, player, team));
     }
 
     public static void deleteGamePlayer(Player player) {
@@ -32,6 +34,7 @@ public class GamePlayer {
         return gamePlayers.get(player);
     }
 
+    private Team team;
     private Champion champion;
     private Player player;
     private boolean dead = false;
@@ -47,9 +50,10 @@ public class GamePlayer {
     private ArrayList<Item> items = new ArrayList<>();
     private HashMap<Statistic, Double> statistics = new HashMap<>();
 
-    public GamePlayer(Champion champion, Player player) {
+    public GamePlayer(Champion champion, Player player, Team team) {
         this.champion = champion;
         this.player = player;
+        this.team = team;
 
         mana = (int) getStatistic(Statistic.MANA);
         abilities = champion.getAbilitySet(this);
@@ -118,13 +122,14 @@ public class GamePlayer {
     public void tick() {
         calculateStatsFromItems();
         calculateExperience();
+        TeamVisualizer.updateEntry(this);
 
         if (isDead()) return;
 
         Iterator<StatusEffect> iterator = statusEffects.iterator();
         while (iterator.hasNext()) {
             StatusEffect statusEffect = iterator.next();
-            statusEffect.tick(this);
+            statusEffect.tick(this.getPlayer());
             if (statusEffect.getDuration() == 0) {
                 statusEffects.remove(statusEffect);
                 return;
@@ -206,5 +211,9 @@ public class GamePlayer {
 
     public int getGold() {
         return gold;
+    }
+
+    public Team getTeam() {
+        return team;
     }
 }

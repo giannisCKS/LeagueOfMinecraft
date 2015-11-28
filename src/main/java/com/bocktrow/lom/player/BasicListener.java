@@ -3,6 +3,7 @@ package com.bocktrow.lom.player;
 import com.bocktrow.lom.champion.mrepic.MrEpic;
 import com.bocktrow.lom.statuseffect.global.Homeguard;
 import com.bocktrow.lom.statuseffect.global.Ignited;
+import com.bocktrow.lom.team.Team;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class BasicListener implements Listener {
 
     @EventHandler
     public void join(PlayerJoinEvent event) {
-        GamePlayer.createGamePlayer(event.getPlayer(), new MrEpic());
+        GamePlayer.createGamePlayer(event.getPlayer(), new MrEpic(), Team.BLUE);
     }
 
     @EventHandler

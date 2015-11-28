@@ -90,7 +90,7 @@ public abstract class Building {
     public void atick() {
         tick();
 
-        String hbar = ChatColor.RED + "";
+        String hbar = ChatColor.GREEN + "";
         int boxes = 10;
         int gboxes = (int) ((health / maxhealth) * 10);
 
@@ -108,6 +108,6 @@ public abstract class Building {
         }
 
 
-        armorStand.setCustomName(ChatColor.AQUA + "" + ((int) health) + " " + ChatColor.RESET + hbar + " " + ChatColor.GOLD + ((int) maxhealth));
+        armorStand.setCustomName(ChatColor.AQUA + "" + ((int) health) + " " + ChatColor.RESET + hbar + " " + ChatColor.YELLOW + ((int) maxhealth));
     }
 }
