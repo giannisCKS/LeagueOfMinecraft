@@ -41,10 +41,13 @@ public class TeamVisualizer {
     }
 
     public static void updateScoreboards() {
-        Bukkit.getOnlinePlayers().stream().filter(player -> GamePlayer.getGamePlayer(player) != null).forEach(player -> {
-            GamePlayer gamePlayer = GamePlayer.getGamePlayer(player);
-            Player player1 = gamePlayer.getPlayer();
-            Scoreboard scoreboard = player1.getScoreboard();
+        Bukkit.getOnlinePlayers().stream().forEach(player -> {
+            Scoreboard scoreboard = player.getScoreboard();
+
+            entries.keySet().forEach(e -> {
+                SEntry entry = entries.get(e);
+                Bukkit.getLogger().info(e + ": " + entry.getPrefix() + " " + entry.getSuffix());
+            });
 
             entries.keySet().stream().filter(s -> scoreboard.getTeam(s) == null).forEach(s -> {
                 Team team = scoreboard.registerNewTeam(s);
@@ -63,6 +66,8 @@ public class TeamVisualizer {
                     }
                 }
             });
+
+            player.setScoreboard(scoreboard);
         });
     }
 }
