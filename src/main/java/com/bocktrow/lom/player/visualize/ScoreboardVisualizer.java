@@ -40,7 +40,7 @@ public class ScoreboardVisualizer {
 
             objective.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
 
-            objective.getScore(ChatColor.AQUA + "").setScore(--slot);
+            objective.getScore(ChatColor.BLACK + "").setScore(--slot);
             objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Time elapsed:").setScore(--slot);
             objective.getScore(ChatColor.YELLOW + "" + finalMins + ":" + finalSecs).setScore(--slot);
             objective.getScore(ChatColor.RED + "").setScore(--slot);
