@@ -46,7 +46,11 @@ public class TeamVisualizer {
             Player player1 = gamePlayer.getPlayer();
             Scoreboard scoreboard = player1.getScoreboard();
 
-            entries.keySet().stream().filter(s -> scoreboard.getTeam(s) == null).forEach(scoreboard::registerNewTeam);
+            entries.keySet().stream().filter(s -> scoreboard.getTeam(s) == null).forEach(s -> {
+                Team team = scoreboard.registerNewTeam(s);
+                team.setPrefix(entries.get(s).getPrefix());
+                team.setSuffix(entries.get(s).getSuffix());
+            });
             scoreboard.getTeams().stream().filter(team -> !entries.containsKey(team.getName())).forEach(Team::unregister);
 
             scoreboard.getTeams().stream().forEach(team -> {
