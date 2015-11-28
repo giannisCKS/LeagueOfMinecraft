@@ -38,7 +38,7 @@ public class ScoreboardVisualizer {
             Objective objective = scoreboard.registerNewObjective("gameSidebar", "dummy");
             int slot = 20;
 
-            objective.setDisplayName(ChatColor.RED + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
+            objective.setDisplayName(gamePlayer.getTeam().getChatColor() + "" + ChatColor.BOLD + gamePlayer.getChampion().getName());
 
             objective.getScore(ChatColor.BLACK + "").setScore(--slot);
             objective.getScore(ChatColor.GOLD + "" + ChatColor.BOLD + "Time elapsed:").setScore(--slot);
