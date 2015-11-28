@@ -24,7 +24,7 @@ public class ScoreboardVisualizer {
         Player player = gamePlayer.getPlayer();
         Scoreboard scoreboard = player.getScoreboard();
 
-        int seconds = Tick.getTick() % 20;
+        int seconds = Tick.getTick() / 20;
         String mins = seconds / 60 + ""; if (mins.length() == 1) mins = "0" + mins;
         String secs = seconds % 60 + ""; if (secs.length() == 1) secs = "0" + secs;
 
